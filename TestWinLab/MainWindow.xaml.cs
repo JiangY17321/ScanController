@@ -14,5 +14,13 @@ namespace TestWinLab
             mainWindowViewModel = new MainWindowViewModel();
             DataContext = mainWindowViewModel;
         }
+
+        private void OperationTreeView_KeyUp(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if(e.Key==System.Windows.Input.Key.Delete)
+            {
+                mainWindowViewModel.DeleteCurrentNode();
+            }
+        }
     }
 }

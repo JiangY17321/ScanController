@@ -45,6 +45,7 @@ namespace TestWinLab
         public OperationNode()
         {
             Children = new ObservableCollection<OperationNode>();
+            ParentNode = null;
         }
 
         public string Content { get; set; }
@@ -62,6 +63,8 @@ namespace TestWinLab
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Children"));
             }
         }
+
+        public OperationNode ParentNode { get; set; }
 
         public Operation Operation { get; set; }
     }

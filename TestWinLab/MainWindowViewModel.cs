@@ -112,6 +112,7 @@ namespace TestWinLab
                 Operation = operation
             };
             currentNode.Children.Add(opeartionNode);
+            opeartionNode.ParentNode = currentNode;
             currentNode.IsExpanded = true;
             opeartionNode.IsSelected = true;
         }
@@ -121,9 +122,21 @@ namespace TestWinLab
             foreach(OperationNode node in operationNodeList)
             {
                 if (node.IsSelected) return node;
-                return GetCurrentNode(node.Children);
+                OperationNode selectedNode= GetCurrentNode(node.Children);
+                if (selectedNode !=null) return selectedNode;
             }
             return null;
+        }
+
+        public void DeleteCurrentNode()
+        {
+            OperationNode currentNode = GetCurrentNode(operationNodes);
+            if (currentNode == null) return;
+            if (currentNode.ParentNode == null) return;
+            if(currentNode.ParentNode.Children.Contains(currentNode))
+            {
+                currentNode.ParentNode.Children.Remove(currentNode);
+            }
         }
     }
 }

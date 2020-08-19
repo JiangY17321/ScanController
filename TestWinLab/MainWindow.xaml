@@ -23,7 +23,8 @@
             </Grid.ColumnDefinitions>
             <Menu FontSize="13pt"  Grid.Row="0" Grid.ColumnSpan="5" VerticalAlignment="Center" VerticalContentAlignment="Center">
                 <MenuItem Header="File" VerticalAlignment="Center" VerticalContentAlignment="Center">
-                    <MenuItem Header="New experiment"/>
+                    <MenuItem Header="Save as..."/>
+                    <MenuItem Header="Load..."/>
                 </MenuItem>
             </Menu>
             <Grid Grid.Row="1" Grid.ColumnSpan="10">
@@ -70,7 +71,7 @@
                     </Button>
                 </StackPanel>
             </Grid>
-            <TreeView FontSize="13pt" x:Name="operationTreeView" Grid.Row="2" Grid.Column="0" ItemsSource="{Binding OperationNodes}">
+            <TreeView FontSize="13pt" x:Name="operationTreeView" Grid.Row="2" Grid.Column="0" ItemsSource="{Binding OperationNodes}" KeyUp="OperationTreeView_KeyUp">
                 <TreeView.Resources>
                     <HierarchicalDataTemplate DataType="{x:Type local:OperationNode}" ItemsSource="{Binding Path=Children}">
                         <StackPanel Orientation="Horizontal">
