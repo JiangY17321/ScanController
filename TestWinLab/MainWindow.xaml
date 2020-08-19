@@ -1,0 +1,100 @@
+﻿<Window x:Class="TestWinLab.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TestWinLab"
+        mc:Ignorable="d"
+        Title="TestWinLab" Height="610" Width="1020" WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <local:ImagePathConverter x:Key="ImagePathConverter"/>
+    </Window.Resources>
+    <DockPanel x:Name="DockPanelForScaling">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="25"/>
+                <RowDefinition Height="35"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="300"/>
+                <ColumnDefinition Width="5"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Menu FontSize="13pt"  Grid.Row="0" Grid.ColumnSpan="5" VerticalAlignment="Center" VerticalContentAlignment="Center">
+                <MenuItem Header="File" VerticalAlignment="Center" VerticalContentAlignment="Center">
+                    <MenuItem Header="New experiment"/>
+                </MenuItem>
+            </Menu>
+            <Grid Grid.Row="1" Grid.ColumnSpan="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="300"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Row="0" Grid.ColumnSpan="5" Orientation="Horizontal">
+                    <Button x:Name="btnExperiment" ToolTip="Experiment" Width="30" Height="30" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="2" Command="{Binding Path=CreateOperationCommand}" CommandParameter="experiment">
+                        <Image Source="Image/Experiment.png"/>
+                    </Button>
+                    <Button x:Name="btnGeneralParam" ToolTip="General param" Width="30" Height="30" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="2" Command="{Binding Path=CreateOperationCommand}" CommandParameter="general_Param">
+                        <Image Source="Image/GeneralParam.png"/>
+                    </Button>
+                    <Button x:Name="btnData" ToolTip="Data" Width="30" Height="30" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="2" Command="{Binding Path=CreateOperationCommand}" CommandParameter="data">
+                        <Image Source="Image/Data.png"/>
+                    </Button>
+                    <Button x:Name="btnBackgroundData" ToolTip="Background Data" Width="30" Height="30" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="2" Command="{Binding Path=CreateOperationCommand}" CommandParameter="background_data">
+                        <Image Source="Image/BackgroundData.png"/>
+                    </Button>
+                    <Button x:Name="btnSample" ToolTip="Sample" Width="30" Height="30" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="2" Command="{Binding Path=CreateOperationCommand}" CommandParameter="sample">
+                        <Image Source="Image/Sample.png"/>
+                    </Button>
+                    <Button x:Name="btnScan" ToolTip="Scan" Width="30" Height="30" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="2" Command="{Binding Path=CreateOperationCommand}" CommandParameter="scan">
+                        <Image Source="Image/Scan.png"/>
+                    </Button>
+                    <Button x:Name="btnTrigger" ToolTip="Trigger" Width="30" Height="30" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="2" Command="{Binding Path=CreateOperationCommand}" CommandParameter="trigger">
+                        <Image Source="Image/Trigger.png"/>
+                    </Button>
+                </StackPanel>
+
+                <StackPanel Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="5" Orientation="Horizontal">
+                    <Button x:Name="btnTemperature" ToolTip="Temperature" Width="30" Height="30" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="2" Command="{Binding Path=CreateOperationCommand}" CommandParameter="temperature">
+                        <Image Source="Image/Temperature.png"/>
+                    </Button>
+                    <Button x:Name="btnTime" ToolTip="Time" Width="30" Height="30" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="2" Command="{Binding Path=CreateOperationCommand}" CommandParameter="time">
+                        <Image Source="Image/Time.png"/>
+                    </Button>
+                    <Button x:Name="btnMicroplatereader" ToolTip="Microplate Reader Position" Width="30" Height="30" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="2" Command="{Binding Path=CreateOperationCommand}" CommandParameter="microplatereader">
+                        <Image Source="Image/Microplatereader.png"/>
+                    </Button>
+                    <Button x:Name="btnWaveLength" ToolTip="Time" Width="30" Height="30" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="2" Command="{Binding Path=CreateOperationCommand}" CommandParameter="wavelength">
+                        <Image Source="Image/Wavelength.png"/>
+                    </Button>
+                </StackPanel>
+            </Grid>
+            <TreeView FontSize="13pt" x:Name="operationTreeView" Grid.Row="2" Grid.Column="0" ItemsSource="{Binding OperationNodes}">
+                <TreeView.Resources>
+                    <HierarchicalDataTemplate DataType="{x:Type local:OperationNode}" ItemsSource="{Binding Path=Children}">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Width="16" Height="16" VerticalAlignment="Center" HorizontalAlignment="Center" Source="{Binding Path=Operation,Converter={StaticResource ImagePathConverter}}"/>
+                            <TextBlock Margin="2,0,0,0" Text="{Binding Content}" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </HierarchicalDataTemplate>
+                </TreeView.Resources>
+                <TreeView.ItemContainerStyle>
+                    <Style TargetType="{x:Type TreeViewItem}">
+                        <Setter Property="IsSelected" Value="{Binding IsSelected}" />
+                        <Setter Property="IsExpanded" Value="{Binding IsExpanded}" />
+                    </Style>
+                </TreeView.ItemContainerStyle>
+            </TreeView>
+            <GridSplitter Grid.Row="2" Grid.Column="1" Width="5" HorizontalAlignment="Stretch" />
+            <TabControl FontSize="13pt" Grid.Row="2" Grid.Column="2">
+                <TabItem Header="Param setting">
+                    
+                </TabItem>
+                <TabItem Header="Sample table">
+
+                </TabItem>
+            </TabControl>
+        </Grid>
+    </DockPanel>
+</Window>
