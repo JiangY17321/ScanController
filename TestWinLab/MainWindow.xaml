@@ -67,7 +67,7 @@
                     <Button x:Name="btnMicroplatereader" ToolTip="Microplate Reader Position" Width="30" Height="30" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="2" Command="{Binding Path=CreateOperationCommand}" CommandParameter="microplatereader">
                         <Image Source="Image/Microplatereader.png"/>
                     </Button>
-                    <Button x:Name="btnWaveLength" ToolTip="Time" Width="30" Height="30" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="2" Command="{Binding Path=CreateOperationCommand}" CommandParameter="wavelength">
+                    <Button x:Name="btnWaveLength" ToolTip="Wave length" Width="30" Height="30" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="2" Command="{Binding Path=CreateOperationCommand}" CommandParameter="wavelength">
                         <Image Source="Image/Wavelength.png"/>
                     </Button>
                 </StackPanel>

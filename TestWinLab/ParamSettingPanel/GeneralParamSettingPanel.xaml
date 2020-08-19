@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="TestWinLab.ParamSettingPanel.ExperimentSettingPanel"
+﻿<UserControl x:Class="TestWinLab.ParamSettingPanel.GeneralParamSettingPanel"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -21,7 +21,13 @@
             <ColumnDefinition Width="200"/>
             <ColumnDefinition Width="200"/>
         </Grid.ColumnDefinitions>
-        <Label FontSize="13pt" Grid.Row="1" Content="Experiment Name:" VerticalAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Right"/>
+        <Label FontSize="13pt" Grid.Row="1" Content="General Param Name:" VerticalAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Right"/>
         <TextBox FontSize="13pt" Grid.Row="1" Grid.Column="1" VerticalContentAlignment="Center" HorizontalAlignment="Stretch" Margin="0,2,0,2" Text="{Binding Content}"/>
+
+        <Label FontSize="13pt" Grid.Row="2" Content="Scan Speed:" VerticalAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Right"/>
+        <TextBox FontSize="13pt" Grid.Row="2" Grid.Column="1" VerticalContentAlignment="Center" HorizontalAlignment="Stretch" Margin="0,2,0,2" Text="{Binding ScanSpeed}"/>
+
+        <Label FontSize="13pt" Grid.Row="3" Content="Resolution:" VerticalAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Right"/>
+        <TextBox FontSize="13pt" Grid.Row="3" Grid.Column="1" VerticalContentAlignment="Center" HorizontalAlignment="Stretch" Margin="0,2,0,2" Text="{Binding Resolution}"/>
     </Grid>
 </UserControl>

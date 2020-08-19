@@ -50,6 +50,27 @@ namespace TestWinLab
                     case OperationType.Experiment:
                         paramSettingUserControl = new ExperimentSettingPanel();
                         break;
+                    case OperationType.GeneralParam:
+                        paramSettingUserControl = new GeneralParamSettingPanel();
+                        break;
+                    case OperationType.Data:
+                        paramSettingUserControl = new DataSettingPanel();
+                        break;
+                    case OperationType.BackgroundData:
+                        paramSettingUserControl = new BackgroundDataSettingPanel();
+                        break;
+                    case OperationType.Sample:
+                        paramSettingUserControl = new SampleSettingPanel();
+                        break;
+                    case OperationType.Scan:
+                        paramSettingUserControl = new ScanSettingPanel();
+                        break;
+                    case OperationType.Trigger:
+                        paramSettingUserControl = new TriggerSettingPanel();
+                        break;
+                    case OperationType.Time:
+                        paramSettingUserControl = new TimeSettingPanel();
+                        break;
 
                 }
                 paramSettingPanelDict.Add(selectedItem.Operation.OperationType, paramSettingUserControl);

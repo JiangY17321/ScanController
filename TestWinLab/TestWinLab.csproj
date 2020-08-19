@@ -77,8 +77,29 @@
     <Compile Include="OperationNode\TimeOperationNode.cs" />
     <Compile Include="OperationNode\TriggerOperationNode.cs" />
     <Compile Include="OperationNode\WaveLengthOperationNode.cs" />
+    <Compile Include="ParamSettingPanel\BackgroundDataSettingPanel.xaml.cs">
+      <DependentUpon>BackgroundDataSettingPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ParamSettingPanel\DataSettingPanel.xaml.cs">
+      <DependentUpon>DataSettingPanel.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ParamSettingPanel\ExperimentSettingPanel.xaml.cs">
       <DependentUpon>ExperimentSettingPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ParamSettingPanel\GeneralParamSettingPanel.xaml.cs">
+      <DependentUpon>GeneralParamSettingPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ParamSettingPanel\SampleSettingPanel.xaml.cs">
+      <DependentUpon>SampleSettingPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ParamSettingPanel\ScanSettingPanel.xaml.cs">
+      <DependentUpon>ScanSettingPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ParamSettingPanel\TimeSettingPanel.xaml.cs">
+      <DependentUpon>TimeSettingPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ParamSettingPanel\TriggerSettingPanel.xaml.cs">
+      <DependentUpon>TriggerSettingPanel.xaml</DependentUpon>
     </Compile>
     <Compile Include="RelayCommand.cs" />
     <Page Include="Dictionary.xaml">
@@ -98,7 +119,35 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="ParamSettingPanel\BackgroundDataSettingPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ParamSettingPanel\DataSettingPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ParamSettingPanel\ExperimentSettingPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ParamSettingPanel\GeneralParamSettingPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ParamSettingPanel\SampleSettingPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ParamSettingPanel\ScanSettingPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ParamSettingPanel\TimeSettingPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ParamSettingPanel\TriggerSettingPanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -144,6 +193,10 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\FinchFlowController\FinchFlowController.csproj">
+      <Project>{cbbec5fd-c557-4544-bea7-7d0089f4defc}</Project>
+      <Name>FinchFlowController</Name>
+    </ProjectReference>
     <ProjectReference Include="..\FlowController\FlowController.csproj">
       <Project>{410a9dc7-ad82-4674-b11f-99ae408b9566}</Project>
       <Name>FlowController</Name>

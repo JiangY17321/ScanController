@@ -53,7 +53,7 @@ namespace TestWinLab
                     newOpeartionNode = new BackgroundDataOperationNode("Background Data");
                     break;
                 case "sample":
-                    newOpeartionNode = new SampleOperationNode("Sample");
+                    newOpeartionNode = new SampleOperationNode("Administrator 01");
                     break;
                 case "scan":
                     newOpeartionNode = new ScanOperationNode("Scan");
