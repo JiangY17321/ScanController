@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TestWinLab"
+        xmlns:settingpanel="clr-namespace:TestWinLab.ParamSettingPanel"
         mc:Ignorable="d"
         Title="TestWinLab" Height="610" Width="1020" WindowStartupLocation="CenterScreen">
     <Window.Resources>
@@ -23,8 +24,8 @@
             </Grid.ColumnDefinitions>
             <Menu FontSize="13pt"  Grid.Row="0" Grid.ColumnSpan="5" VerticalAlignment="Center" VerticalContentAlignment="Center">
                 <MenuItem Header="File" VerticalAlignment="Center" VerticalContentAlignment="Center">
-                    <MenuItem Header="Save as..."/>
-                    <MenuItem Header="Load..."/>
+                    <MenuItem Header="Save as ..."/>
+                    <MenuItem Header="Load ..."/>
                 </MenuItem>
             </Menu>
             <Grid Grid.Row="1" Grid.ColumnSpan="10">
@@ -71,7 +72,7 @@
                     </Button>
                 </StackPanel>
             </Grid>
-            <TreeView FontSize="13pt" x:Name="operationTreeView" Grid.Row="2" Grid.Column="0" ItemsSource="{Binding OperationNodes}" KeyUp="OperationTreeView_KeyUp">
+            <TreeView FontSize="13pt" x:Name="operationTreeView" Grid.Row="2" Grid.Column="0" ItemsSource="{Binding OperationNodes}" KeyUp="OperationTreeView_KeyUp" SelectedItemChanged="OperationTreeView_SelectedItemChanged">
                 <TreeView.Resources>
                     <HierarchicalDataTemplate DataType="{x:Type local:OperationNode}" ItemsSource="{Binding Path=Children}">
                         <StackPanel Orientation="Horizontal">
@@ -89,10 +90,10 @@
             </TreeView>
             <GridSplitter Grid.Row="2" Grid.Column="1" Width="5" HorizontalAlignment="Stretch" />
             <TabControl FontSize="13pt" Grid.Row="2" Grid.Column="2">
-                <TabItem Header="Param setting">
+                <TabItem x:Name="tabItemParamSetting" Header="Param setting">
                     
                 </TabItem>
-                <TabItem Header="Sample table">
+                <TabItem x:Name="tabItemSampleTable"  Header="Sample table">
 
                 </TabItem>
             </TabControl>

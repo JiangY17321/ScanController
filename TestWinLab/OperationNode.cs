@@ -48,7 +48,19 @@ namespace TestWinLab
             ParentNode = null;
         }
 
-        public string Content { get; set; }
+        private string _content;
+        public string Content
+        {
+            get
+            {
+                return _content;
+            }
+            set
+            {
+                _content = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Content"));
+            }
+        }
 
         private ObservableCollection<OperationNode> children;
         public ObservableCollection<OperationNode> Children
