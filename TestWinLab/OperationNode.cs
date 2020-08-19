@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
 using FlowController;
 
@@ -45,19 +44,21 @@ namespace TestWinLab
         public OperationNode()
         {
             Children = new ObservableCollection<OperationNode>();
-            ParentNode = null;
+            parentNode = null;
+            operation = null;
+            content = null;
         }
 
-        private string _content;
-        public string Content
+        private string content;
+        public virtual string Content
         {
             get
             {
-                return _content;
+                return content;
             }
             set
             {
-                _content = value;
+                content = value;
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Content"));
             }
         }
@@ -76,8 +77,32 @@ namespace TestWinLab
             }
         }
 
-        public OperationNode ParentNode { get; set; }
+        private OperationNode parentNode;
+        public OperationNode ParentNode
+        {
+            get
+            {
+                return parentNode;
+            }
+            set
+            {
+                parentNode = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("ParentNode"));
+            }
+        }
 
-        public Operation Operation { get; set; }
+        private Operation operation;
+        public Operation Operation
+        {
+            get
+            {
+                return operation;
+            }
+            set
+            {
+                operation = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Operation"));
+            }
+        }
     }
 }

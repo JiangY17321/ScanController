@@ -32,41 +32,56 @@ namespace TestWinLab
         private void CreateOperation(object param)
         {
             if (param == null) return;
-            switch(param.ToString())
+            OperationNode currentNode = GetCurrentNode(operationNodes);
+            if (currentNode == null && operationNodes.Count!=0)
+            {
+                currentNode = operationNodes[0];
+            }
+
+            OperationNode newOpeartionNode = null;
+            switch (param.ToString())
             {
                 case "experiment":
                     CreateExperimentNode();
                     break;
                 case "general_Param":
-                    CreateSubNode("General Param",new GeneralParamOperation());
+                    newOpeartionNode = new GeneralParamOperationNode("General Param");
                     break;
                 case "data":
-                    CreateSubNode("Data", new DataOperation());
+                    newOpeartionNode = new DataOperationNode("Data");
                     break;
                 case "background_data":
-                    CreateSubNode("Background Data", new BackgroundDataOperation());
+                    newOpeartionNode = new BackgroundDataOperationNode("Background Data");
                     break;
                 case "sample":
-                    CreateSubNode("Sample", new SampleOperation());
+                    newOpeartionNode = new SampleOperationNode("Sample");
                     break;
                 case "scan":
-                    CreateSubNode("Scan", new ScanOperation());
+                    newOpeartionNode = new ScanOperationNode("Scan");
                     break;
                 case "trigger":
-                    CreateSubNode("Trigger", new TriggerOperation());
+                    newOpeartionNode = new TriggerOperationNode("Trigger");
                     break;
                 case "temperature":
-                    CreateSubNode("Temperature", new TemperatureOperation());
+                    newOpeartionNode = new TemperatureOperationNode("Temperature");
                     break;
                 case "time":
-                    CreateSubNode("Time", new TimeOperation());
+                    newOpeartionNode = new TimeOperationNode("Time");
                     break;
                 case "microplatereader":
-                    CreateSubNode("Microplate Reader", new MPROperation());
+                    newOpeartionNode=new MPROperationNode("Microplate Reader");
                     break;
                 case "wavelength":
-                    CreateSubNode("Wave Length", new WaveLengthOperation());
+                    newOpeartionNode = new WaveLengthOperationNode("Wave Length");
                     break;
+            }
+
+            if(newOpeartionNode!=null)
+            {
+                currentNode.Children.Add(newOpeartionNode);
+                newOpeartionNode.ParentNode = currentNode;
+                currentNode.IsExpanded = true;
+                newOpeartionNode.IsSelected = true;
             }
         }
 
@@ -92,29 +107,7 @@ namespace TestWinLab
 
         private void CreateExperimentNode()
         {
-            operationNodes.Add(new OperationNode()
-            {
-                Content = "Experiment",
-                Operation = new ExperimentOperation(),
-            });
-        }
-
-        private void CreateSubNode(string content,Operation operation)
-        {
-            OperationNode currentNode = GetCurrentNode(operationNodes);
-            if (currentNode == null)
-            {
-                currentNode = operationNodes[0];
-            }
-            OperationNode opeartionNode = new OperationNode()
-            {
-                Content = content,
-                Operation = operation
-            };
-            currentNode.Children.Add(opeartionNode);
-            opeartionNode.ParentNode = currentNode;
-            currentNode.IsExpanded = true;
-            opeartionNode.IsSelected = true;
+            operationNodes.Add(new ExperimentOperationNode("Experiment"));
         }
 
         private OperationNode GetCurrentNode(IList<OperationNode> operationNodeList)

@@ -66,6 +66,17 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="OperationNode\BackgroundDataOperationNode.cs" />
+    <Compile Include="OperationNode\DataOperationNode.cs" />
+    <Compile Include="OperationNode\ExperimentOperationNode.cs" />
+    <Compile Include="OperationNode\GeneralParamOperationNode.cs" />
+    <Compile Include="OperationNode\MPROperationNode.cs" />
+    <Compile Include="OperationNode\SampleOperationNode.cs" />
+    <Compile Include="OperationNode\ScanOperationNode.cs" />
+    <Compile Include="OperationNode\TemperatureOperationNode.cs" />
+    <Compile Include="OperationNode\TimeOperationNode.cs" />
+    <Compile Include="OperationNode\TriggerOperationNode.cs" />
+    <Compile Include="OperationNode\WaveLengthOperationNode.cs" />
     <Compile Include="ParamSettingPanel\ExperimentSettingPanel.xaml.cs">
       <DependentUpon>ExperimentSettingPanel.xaml</DependentUpon>
     </Compile>
