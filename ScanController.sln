@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlowController", "FlowContr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinchFlowController", "FinchFlowController\FinchFlowController.csproj", "{CBBEC5FD-C557-4544-BEA7-7D0089F4DEFC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimInstCtrl", "SimInstCtrl\SimInstCtrl.csproj", "{7D9E9105-1283-4F2E-8D1F-A96E9465239C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{CBBEC5FD-C557-4544-BEA7-7D0089F4DEFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CBBEC5FD-C557-4544-BEA7-7D0089F4DEFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CBBEC5FD-C557-4544-BEA7-7D0089F4DEFC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7D9E9105-1283-4F2E-8D1F-A96E9465239C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7D9E9105-1283-4F2E-8D1F-A96E9465239C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7D9E9105-1283-4F2E-8D1F-A96E9465239C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7D9E9105-1283-4F2E-8D1F-A96E9465239C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
