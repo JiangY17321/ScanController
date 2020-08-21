@@ -26,6 +26,7 @@
                 <MenuItem Header="File" VerticalAlignment="Center" VerticalContentAlignment="Center">
                     <MenuItem Header="Save as ..."/>
                     <MenuItem Header="Load ..."/>
+                    <MenuItem Header="Run" Command="{Binding Path=RunCommand}"/>
                 </MenuItem>
             </Menu>
             <Grid Grid.Row="1" Grid.ColumnSpan="10">

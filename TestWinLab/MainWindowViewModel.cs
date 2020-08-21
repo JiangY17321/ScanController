@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using FlowController;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Threading;
 using System.Windows.Input;
 
 namespace TestWinLab
@@ -22,10 +24,13 @@ namespace TestWinLab
 
         public ICommand CreateOperationCommand { get; }
 
+        public ICommand RunCommand { get; }
+
         public MainWindowViewModel()
         {
             operationNodes = new ObservableCollection<OperationNode>();
             CreateOperationCommand = new RelayCommand(CanCreateOperation, CreateOperation);
+            RunCommand= new RelayCommand(CanRun, Run);
         }
 
         private void CreateOperation(object param)
@@ -104,6 +109,41 @@ namespace TestWinLab
             return true;
         }
 
+
+        private void Run(object param)
+        {
+            List<Operation> opeartionList = new List<Operation>();
+            foreach(OperationNode operationNode in operationNodes)
+            {
+                Operation operation= GenerateOperationTree(operationNode);
+                if(operation!=null)
+                {
+                    opeartionList.Add(operation);
+                }
+            }
+
+            Thread thread = new Thread(() =>
+              {
+                  foreach(Operation experimentOperation in opeartionList)
+                  {
+                      if(experimentOperation is ExperimentOperation)
+                      {
+                          ExperimentFlow.GetInstance().RunNewExperiment(experimentOperation as ExperimentOperation);
+                      }
+                  }
+              }){ IsBackground = true };
+            thread.Start();
+
+        }
+
+
+
+        private bool CanRun(object param)
+        {
+            if (operationNodes.Count == 0) return false;
+            return true;
+        }
+
         private void CreateExperimentNode()
         {
             operationNodes.Add(new ExperimentOperationNode("Experiment"));
@@ -129,6 +169,23 @@ namespace TestWinLab
             {
                 currentNode.ParentNode.Children.Remove(currentNode);
             }
+        }
+
+        public Operation GenerateOperationTree(OperationNode rootOpeartionNode)
+        {
+            if (rootOpeartionNode == null) return null;
+            if (rootOpeartionNode.Operation == null) return null;
+            if (rootOpeartionNode.Operation.ChildOperations == null) return null;
+            rootOpeartionNode.Operation.ChildOperations.Clear();
+            foreach (OperationNode operationNode in rootOpeartionNode.Children)
+            {
+                if(operationNode.Operation!=null)
+                {
+                    rootOpeartionNode.Operation.ChildOperations.Add(operationNode.Operation);
+                }
+                GenerateOperationTree(operationNode);
+            }
+            return rootOpeartionNode.Operation;
         }
     }
 }
