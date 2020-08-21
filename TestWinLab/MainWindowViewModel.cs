@@ -1,4 +1,5 @@
 ﻿using FlowController;
+using SimInstCtrl;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -26,11 +27,14 @@ namespace TestWinLab
 
         public ICommand RunCommand { get; }
 
+        private InstCtrl instCtrl;
+
         public MainWindowViewModel()
         {
             operationNodes = new ObservableCollection<OperationNode>();
             CreateOperationCommand = new RelayCommand(CanCreateOperation, CreateOperation);
             RunCommand= new RelayCommand(CanRun, Run);
+            instCtrl = new InstCtrl();
         }
 
         private void CreateOperation(object param)
@@ -61,7 +65,7 @@ namespace TestWinLab
                     newOpeartionNode = new SampleOperationNode("Administrator 01");
                     break;
                 case "scan":
-                    newOpeartionNode = new ScanOperationNode("Scan");
+                    newOpeartionNode = new ScanOperationNode("Scan",instCtrl);
                     break;
                 case "trigger":
                     newOpeartionNode = new TriggerOperationNode("Trigger");

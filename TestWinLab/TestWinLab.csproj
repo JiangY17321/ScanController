@@ -201,6 +201,10 @@
       <Project>{410a9dc7-ad82-4674-b11f-99ae408b9566}</Project>
       <Name>FlowController</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SimInstCtrl\SimInstCtrl.csproj">
+      <Project>{7d9e9105-1283-4f2e-8d1f-a96e9465239c}</Project>
+      <Name>SimInstCtrl</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Image\Data.png" />
