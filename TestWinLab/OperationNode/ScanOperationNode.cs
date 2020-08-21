@@ -1,4 +1,5 @@
-﻿using FlowController;
+﻿using FinchFlowController;
+using FlowController;
 
 namespace TestWinLab
 {
@@ -9,7 +10,7 @@ namespace TestWinLab
             ParentNode = null;
             Operation = null;
             Content = content;
-            Operation = new ScanOperation();
+            Operation = new FinchScanOperation();
         }
     }
 }
