@@ -1,4 +1,7 @@
-﻿namespace SimInstCtrl
+﻿using System;
+using System.Threading;
+
+namespace SimInstCtrl
 {
     public class InstCtrl
     {
@@ -27,7 +30,25 @@
         public DataReceived_DoublePoint DoublePoint_CallBack { get; set; }
 
         public DataReceived_DoublePoint_Arrays DoublePoint_Arrays_CallBack { get; set; }
+
+
+        public void PerformScan_SinglePoint()
+        {
+            Thread thread = new Thread(() =>
+              {
+                  Thread.Sleep(1000);
+                  for(int i=0;i<200;i++)
+                  {
+                      Thread.Sleep(100);
+                      Random random = new Random((int)DateTime.Now.Ticks);
+                      SinglePoint_CallBack?.Invoke(random.Next(i, 100 + i));
+                  }
+
+                  ScanCompelete_CallBack?.Invoke();
+
+              })
+            { IsBackground = true};
+            thread.Start();
+        }
     }
-
-
 }

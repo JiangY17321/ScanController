@@ -10,7 +10,8 @@ namespace TestWinLab
             ParentNode = null;
             Operation = null;
             Content = content;
-            Operation = new FinchScanOperation(instCtrl);
+            Operation = new FinchScanOperation();
+            (Operation as FinchScanOperation).Init(instCtrl);
         }
     }
 }

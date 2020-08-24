@@ -24,8 +24,8 @@
             </Grid.ColumnDefinitions>
             <Menu FontSize="13pt"  Grid.Row="0" Grid.ColumnSpan="5" VerticalAlignment="Center" VerticalContentAlignment="Center">
                 <MenuItem Header="File" VerticalAlignment="Center" VerticalContentAlignment="Center">
-                    <MenuItem Header="Save as ..."/>
-                    <MenuItem Header="Load ..."/>
+                    <MenuItem Header="Save as ..." Click="MenuItem_Click_Save"/>
+                    <MenuItem Header="Load ..." Click="MenuItem_Click_Load"/>
                     <MenuItem Header="Run" Command="{Binding Path=RunCommand}"/>
                 </MenuItem>
             </Menu>

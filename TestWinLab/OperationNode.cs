@@ -49,7 +49,7 @@ namespace TestWinLab
             content = null;
         }
 
-        private string content;
+        protected string content;
         public virtual string Content
         {
             get

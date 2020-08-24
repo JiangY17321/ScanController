@@ -191,5 +191,24 @@ namespace TestWinLab
             }
             return rootOpeartionNode.Operation;
         }
+
+        public void SaveOperationTreeToFile(string fileName)
+        {
+            if (operationNodes.Count == 0) return;
+            if (operationNodes[0] == null) return;
+            Operation operation= GenerateOperationTree(operationNodes[0]);
+            ExperimentOperation experimentOperation = operation as ExperimentOperation;
+
+            if(experimentOperation!=null)
+            {
+                ExperimentFlow.GetInstance().SaveOperationTreeToFile(experimentOperation, fileName);
+            }
+        }
+
+
+        public void OpenOperationTreeFile(string fileName)
+        {
+            ExperimentOperation experimentOperation = ExperimentFlow.GetInstance().LoadOperationTreeFromFile(fileName);
+        }
     }
 }

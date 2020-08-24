@@ -1,4 +1,8 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
+using System;
+using System.IO;
+using System.Text;
 using System.Threading;
 
 namespace FlowController
@@ -96,6 +100,36 @@ namespace FlowController
             {
                 System.Diagnostics.Debug.WriteLine(ex.StackTrace);
             }
+        }
+
+        public void SaveOperationTreeToFile(ExperimentOperation experimentOperation,
+            string fileName)
+        {
+            JsonSerializerSettings settings = new JsonSerializerSettings()
+            {
+                ContractResolver = new CamelCasePropertyNamesContractResolver(),
+                Formatting = Formatting.Indented,
+                PreserveReferencesHandling = PreserveReferencesHandling.Objects,
+            };
+
+            string content=JsonConvert.SerializeObject(experimentOperation, settings);
+            FileStream fileStream = new FileStream(fileName, FileMode.Create);
+            byte[] bytesContent = Encoding.UTF8.GetBytes(content);
+            fileStream.Write(bytesContent, 0, bytesContent.Length);
+            fileStream.Close();
+        }
+
+        public ExperimentOperation LoadOperationTreeFromFile(string fileName)
+        {
+            FileStream fileStream = new FileStream(fileName, FileMode.Open);
+            byte[] content = new byte[fileStream.Length];
+            fileStream.Read(content, 0, content.Length);
+
+            string stringContent = Encoding.UTF8.GetString(content);
+
+            ExperimentOperation experimentOperation=
+                JsonConvert.DeserializeObject<ExperimentOperation>(stringContent);
+            return experimentOperation;
         }
     }
 }

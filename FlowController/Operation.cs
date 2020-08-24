@@ -1,12 +1,15 @@
-﻿using System.Collections.Generic;
+﻿using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace FlowController
 {
+    [JsonConverter(typeof(OperationConverter))]
     public abstract class Operation
     {
         public OperationType OperationType { get; }
 
-        public List<Operation> ChildOperations { get; }
+      
+        public List<Operation> ChildOperations { get; set; }
 
         public Operation(OperationType operationType)
         {

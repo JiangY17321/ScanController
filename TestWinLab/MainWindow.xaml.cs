@@ -1,4 +1,5 @@
 ﻿using FlowController;
+using Microsoft.Win32;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
@@ -80,6 +81,36 @@ namespace TestWinLab
             {
                 tabItemParamSetting.Content = paramSettingUserControl;
                 paramSettingUserControl.DataContext = selectedItem;
+            }
+        }
+
+        private void MenuItem_Click_Load(object sender, RoutedEventArgs e)
+        {
+            if (mainWindowViewModel == null) return;
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Operation file (.operation)|*.operation";
+            openFileDialog.DefaultExt = ".operation";
+            bool? result = openFileDialog.ShowDialog();
+            if (result == true)
+            {
+                string filename = openFileDialog.FileName;
+                mainWindowViewModel.OpenOperationTreeFile(filename);
+            }
+        }
+
+
+        private void MenuItem_Click_Save(object sender, RoutedEventArgs e)
+        {
+            if (mainWindowViewModel == null) return;
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "Operation file (.operation)|*.operation";
+            saveFileDialog.DefaultExt = ".operation";
+
+            bool? result = saveFileDialog.ShowDialog();
+            if (result == true)
+            {
+                string filename = saveFileDialog.FileName;
+                mainWindowViewModel.SaveOperationTreeToFile(filename);
             }
         }
     }
