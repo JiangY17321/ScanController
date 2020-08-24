@@ -1,4 +1,5 @@
-﻿using FlowController;
+﻿using FinchFlowController;
+using FlowController;
 using SimInstCtrl;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -53,7 +54,7 @@ namespace TestWinLab
                     CreateExperimentNode();
                     break;
                 case "general_Param":
-                    newOpeartionNode = new GeneralParamOperationNode("General Param");
+                    newOpeartionNode = new FastScanParamOperationNode("FastScan Param");
                     break;
                 case "data":
                     newOpeartionNode = new DataOperationNode("Data");
@@ -65,7 +66,8 @@ namespace TestWinLab
                     newOpeartionNode = new SampleOperationNode("Administrator 01");
                     break;
                 case "scan":
-                    newOpeartionNode = new ScanOperationNode("Scan",instCtrl);
+                    newOpeartionNode = new FinchScanOperationNode("Scan");
+                    (newOpeartionNode.Operation as FinchScanOperation)?.Init(instCtrl); 
                     break;
                 case "trigger":
                     newOpeartionNode = new TriggerOperationNode("Trigger");
@@ -175,7 +177,7 @@ namespace TestWinLab
             }
         }
 
-        public Operation GenerateOperationTree(OperationNode rootOpeartionNode)
+        private Operation GenerateOperationTree(OperationNode rootOpeartionNode)
         {
             if (rootOpeartionNode == null) return null;
             if (rootOpeartionNode.Operation == null) return null;
@@ -190,6 +192,66 @@ namespace TestWinLab
                 GenerateOperationTree(operationNode);
             }
             return rootOpeartionNode.Operation;
+        }
+
+        public OperationNode GenerateOperationNodeTree(Operation operation)
+        {
+            if (operation == null) return null;
+            OperationNode operationNode = null;
+            if(operation.GetType()== typeof(BackgroundDataOperation))
+            {
+                operationNode = new BackgroundDataOperationNode(operation as BackgroundDataOperation);
+            }
+            else if (operation.GetType() == typeof(DataOperation))
+            {
+                operationNode = new DataOperationNode(operation as DataOperation);
+            }
+            else if (operation.GetType() == typeof(ExperimentOperation))
+            {
+                operationNode = new ExperimentOperationNode(operation as ExperimentOperation);
+            }
+            else if (operation.GetType() == typeof(FastScanParamOperation))
+            {
+                operationNode = new FastScanParamOperationNode(operation as FastScanParamOperation);
+            }
+            else if (operation.GetType() == typeof(MPROperation))
+            {
+                operationNode = new MPROperationNode(operation as MPROperation);
+            }
+            else if (operation.GetType() == typeof(SampleOperation))
+            {
+                operationNode = new SampleOperationNode(operation as SampleOperation);
+            }
+            else if (operation.GetType() == typeof(TemperatureOperation))
+            {
+                operationNode = new TemperatureOperationNode(operation as TemperatureOperation);
+            }
+            else if (operation.GetType() == typeof(TimeOperation))
+            {
+                operationNode = new TimeOperationNode(operation as TimeOperation);
+            }
+            else if (operation.GetType() == typeof(TriggerOperation))
+            {
+                operationNode = new TriggerOperationNode(operation as TriggerOperation);
+            }
+            else if (operation.GetType() == typeof(WaveLengthOperation))
+            {
+                operationNode = new WaveLengthOperationNode(operation as WaveLengthOperation);
+            }
+            else if (operation.GetType() == typeof(FinchScanOperation))
+            {
+                operationNode = new FinchScanOperationNode(operation as FinchScanOperation);
+            }
+            foreach (Operation childOperation in operation.ChildOperations)
+            {
+                OperationNode childOperationNode = GenerateOperationNodeTree(childOperation);
+                if(childOperationNode!=null && operationNode != null)
+                {
+                    operationNode.Children.Add(childOperationNode);
+                }
+            }
+
+            return operationNode;
         }
 
         public void SaveOperationTreeToFile(string fileName)
@@ -209,6 +271,26 @@ namespace TestWinLab
         public void OpenOperationTreeFile(string fileName)
         {
             ExperimentOperation experimentOperation = ExperimentFlow.GetInstance().LoadOperationTreeFromFile(fileName);
+            if (experimentOperation == null) return;
+
+            OperationNode opeartionNode = GenerateOperationNodeTree(experimentOperation);
+            ExpandOperationNode(opeartionNode);
+            if (opeartionNode as ExperimentOperationNode!=null)
+            {
+                operationNodes.Clear();
+                operationNodes.Add(opeartionNode);
+            }
+            
+        }
+
+        private void ExpandOperationNode(OperationNode opeartionNode)
+        {
+            if (opeartionNode == null) return;
+            opeartionNode.IsExpanded = true;
+            foreach(OperationNode node in opeartionNode.Children)
+            {
+                ExpandOperationNode(node);
+            }
         }
     }
 }

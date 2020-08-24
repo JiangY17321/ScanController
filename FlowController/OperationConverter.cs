@@ -2,7 +2,6 @@
 using Newtonsoft.Json.Linq;
 using System;
 using System.Reflection;
-using System.Runtime.Remoting;
 
 namespace FlowController
 {
@@ -38,31 +37,28 @@ namespace FlowController
             Type objectType, object existingValue,
             JsonSerializer serializer)
         {
-            JObject jsonObject = null;
-            if (objectType.IsSubclassOf(typeof(Operation))
-                || objectType== typeof(Operation))
-            {
-                jsonObject = JObject.Load(reader);
-                string typeString = jsonObject["type"].ToString();
-                string assemblyType = typeString.Split('.')[0];
-                Operation operationObject = null;
-                try
-                {
-                    Assembly assembly = Assembly.Load(assemblyType);
-                    operationObject=assembly.CreateInstance(typeString) as Operation;
-                }
-                catch (Exception ex)
-                {
-                    System.Diagnostics.Debug.Fail(ex.StackTrace);
-                }
+            if (!objectType.IsSubclassOf(typeof(Operation)) && objectType != typeof(Operation))
+                return null;
 
-                if(operationObject!=null)
-                {
-                    serializer.Populate(jsonObject.CreateReader(), operationObject);
-                }
-                return operationObject;
+            JObject jsonObject = JObject.Load(reader);
+            string typeString = jsonObject["type"].ToString();
+            string assemblyType = typeString.Split('.')[0];
+            Operation operationObject = null;
+            try
+            {
+                Assembly assembly = Assembly.Load(assemblyType);
+                operationObject = assembly.CreateInstance(typeString) as Operation;
             }
-            return null;
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.Fail(ex.StackTrace);
+            }
+
+            if (operationObject != null)
+            {
+                serializer.Populate(jsonObject.CreateReader(), operationObject);
+            }
+            return operationObject;
         }
     }
 }

@@ -69,10 +69,10 @@
     <Compile Include="OperationNode\BackgroundDataOperationNode.cs" />
     <Compile Include="OperationNode\DataOperationNode.cs" />
     <Compile Include="OperationNode\ExperimentOperationNode.cs" />
-    <Compile Include="OperationNode\GeneralParamOperationNode.cs" />
+    <Compile Include="OperationNode\FastScanParamOperationNode.cs" />
     <Compile Include="OperationNode\MPROperationNode.cs" />
     <Compile Include="OperationNode\SampleOperationNode.cs" />
-    <Compile Include="OperationNode\ScanOperationNode.cs" />
+    <Compile Include="OperationNode\FinchScanOperationNode.cs" />
     <Compile Include="OperationNode\TemperatureOperationNode.cs" />
     <Compile Include="OperationNode\TimeOperationNode.cs" />
     <Compile Include="OperationNode\TriggerOperationNode.cs" />
@@ -89,17 +89,26 @@
     <Compile Include="ParamSettingPanel\GeneralParamSettingPanel.xaml.cs">
       <DependentUpon>GeneralParamSettingPanel.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ParamSettingPanel\MPRSettingPanel.xaml.cs">
+      <DependentUpon>MPRSettingPanel.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ParamSettingPanel\SampleSettingPanel.xaml.cs">
       <DependentUpon>SampleSettingPanel.xaml</DependentUpon>
     </Compile>
     <Compile Include="ParamSettingPanel\ScanSettingPanel.xaml.cs">
       <DependentUpon>ScanSettingPanel.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ParamSettingPanel\TemperatureSettingPanel.xaml.cs">
+      <DependentUpon>TemperatureSettingPanel.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ParamSettingPanel\TimeSettingPanel.xaml.cs">
       <DependentUpon>TimeSettingPanel.xaml</DependentUpon>
     </Compile>
     <Compile Include="ParamSettingPanel\TriggerSettingPanel.xaml.cs">
       <DependentUpon>TriggerSettingPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ParamSettingPanel\WavelengthSettingPanel.xaml.cs">
+      <DependentUpon>WavelengthSettingPanel.xaml</DependentUpon>
     </Compile>
     <Compile Include="RelayCommand.cs" />
     <Page Include="Dictionary.xaml">
@@ -135,6 +144,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="ParamSettingPanel\MPRSettingPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ParamSettingPanel\SampleSettingPanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -143,11 +156,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="ParamSettingPanel\TemperatureSettingPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ParamSettingPanel\TimeSettingPanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ParamSettingPanel\TriggerSettingPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ParamSettingPanel\WavelengthSettingPanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

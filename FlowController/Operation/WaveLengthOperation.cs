@@ -8,6 +8,7 @@ namespace FlowController
 {
     public class WaveLengthOperation : Operation
     {
+        public string WaveLengthName { get; set; }
         public WaveLengthOperation() : base(OperationType.WaveLength)
         {
 

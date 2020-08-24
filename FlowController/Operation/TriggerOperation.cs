@@ -5,6 +5,7 @@
     /// </summary>
     public class TriggerOperation : Operation
     {
+        public string TriggerName { get; set; }
         public TriggerOperation() : base(OperationType.Trigger)
         {
 

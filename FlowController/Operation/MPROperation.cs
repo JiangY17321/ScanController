@@ -5,6 +5,7 @@
     /// </summary>
     public class MPROperation : Operation
     {
+        public string MPRName { get; set; }
         public MPROperation() : base(OperationType.MicroplateReader_Position)
         {
 

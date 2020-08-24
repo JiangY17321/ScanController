@@ -72,6 +72,15 @@ namespace TestWinLab
                     case OperationType.Time:
                         paramSettingUserControl = new TimeSettingPanel();
                         break;
+                    case OperationType.Temperature:
+                        paramSettingUserControl = new TemperatureSettingPanel();
+                        break;
+                    case OperationType.MicroplateReader_Position:
+                        paramSettingUserControl = new MPRSettingPanel();
+                        break;
+                    case OperationType.WaveLength:
+                        paramSettingUserControl = new WavelengthSettingPanel();
+                        break;
 
                 }
                 paramSettingPanelDict.Add(selectedItem.Operation.OperationType, paramSettingUserControl);

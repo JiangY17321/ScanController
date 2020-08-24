@@ -107,9 +107,7 @@ namespace FlowController
         {
             JsonSerializerSettings settings = new JsonSerializerSettings()
             {
-                ContractResolver = new CamelCasePropertyNamesContractResolver(),
                 Formatting = Formatting.Indented,
-                PreserveReferencesHandling = PreserveReferencesHandling.Objects,
             };
 
             string content=JsonConvert.SerializeObject(experimentOperation, settings);

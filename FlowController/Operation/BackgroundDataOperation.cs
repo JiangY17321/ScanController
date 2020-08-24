@@ -5,6 +5,7 @@
     /// </summary>
     public class BackgroundDataOperation : Operation
     {
+        public string BackgroundDataName { get; set; }
         public BackgroundDataOperation() : base(OperationType.BackgroundData)
         {
 

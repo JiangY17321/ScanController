@@ -7,6 +7,8 @@
     /// </summary>
     public class DataOperation : Operation
     {
+        public string DataName { get; set; }
+
         public DataOperation() : base(OperationType.Data)
         {
 
