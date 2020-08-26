@@ -23,6 +23,9 @@ namespace FlowController
 
         private static ManualResetEvent manualResetEvent;
         public bool IsRunning { get; private set; }
+
+        public Operation Parent { get; set; }
+
         public Operation(OperationType operationType)
         {
             OperationType = operationType;
