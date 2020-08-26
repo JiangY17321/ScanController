@@ -9,14 +9,14 @@ namespace TestWinLab
             get
             {
                 if (BackgroundDataOperation != null)
-                    return BackgroundDataOperation.BackgroundDataName;
+                    return BackgroundDataOperation.Name;
                 return content;
             }
             set
             {
                 content = value;
                 if (BackgroundDataOperation != null)
-                    BackgroundDataOperation.BackgroundDataName = value;
+                    BackgroundDataOperation.Name = value;
                 OnPropertyChanged("Content");
             }
         }
@@ -35,7 +35,7 @@ namespace TestWinLab
             Operation = null;
             Content = content;
             Operation = new BackgroundDataOperation();
-            BackgroundDataOperation.BackgroundDataName = content;
+            BackgroundDataOperation.Name = content;
         }
 
         public BackgroundDataOperationNode(BackgroundDataOperation backgroundDataOperation)

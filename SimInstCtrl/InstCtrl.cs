@@ -39,9 +39,10 @@ namespace SimInstCtrl
                   Thread.Sleep(1000);
                   for(int i=0;i<200;i++)
                   {
-                      Thread.Sleep(100);
+                      Thread.Sleep(50);
                       Random random = new Random((int)DateTime.Now.Ticks);
-                      SinglePoint_CallBack?.Invoke(random.Next(i, 100 + i));
+                      int start = Math.Abs(i - 100);
+                      SinglePoint_CallBack?.Invoke(random.Next(start, 100 + start));
                   }
 
                   ScanCompelete_CallBack?.Invoke();

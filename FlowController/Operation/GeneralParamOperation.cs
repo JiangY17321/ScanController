@@ -6,7 +6,6 @@
     /// </summary>
     public class GeneralParamOperation : Operation
     {
-        public string GeneralParamName { get; set; }
         public GeneralParamOperation() : base(OperationType.GeneralParam)
         {
 

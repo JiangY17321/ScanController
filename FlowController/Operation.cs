@@ -1,18 +1,27 @@
 ﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Threading;
 
 namespace FlowController
 {
+    public class ExportAttribute : Attribute { }
+
     [JsonConverter(typeof(OperationConverter))]
     public abstract class Operation
     {
+        #region EXPORT
+        [Export]
         public OperationType OperationType { get; }
-      
+
+        [Export]
         public List<Operation> ChildOperations { get; set; }
 
-        private static ManualResetEvent manualResetEvent;
+        [Export]
+        public string Name { get; set; }
+        #endregion
 
+        private static ManualResetEvent manualResetEvent;
         public bool IsRunning { get; private set; }
         public Operation(OperationType operationType)
         {

@@ -9,14 +9,14 @@ namespace TestWinLab
             get
             {
                 if (TriggerOperation != null)
-                    return TriggerOperation.TriggerName;
+                    return TriggerOperation.Name;
                 return content;
             }
             set
             {
                 content = value;
                 if (TriggerOperation != null)
-                    TriggerOperation.TriggerName = value;
+                    TriggerOperation.Name = value;
                 OnPropertyChanged("Content");
             }
         }
@@ -35,7 +35,7 @@ namespace TestWinLab
             Operation = null;
             Content = content;
             Operation = new TriggerOperation();
-            TriggerOperation.TriggerName = content;
+            TriggerOperation.Name = content;
         }
 
         public TriggerOperationNode(TriggerOperation triggerOperation)

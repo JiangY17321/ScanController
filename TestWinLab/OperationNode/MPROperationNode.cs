@@ -9,14 +9,14 @@ namespace TestWinLab
             get
             {
                 if (MPROperation != null)
-                    return MPROperation.MPRName;
+                    return MPROperation.Name;
                 return content;
             }
             set
             {
                 content = value;
                 if (MPROperation != null)
-                    MPROperation.MPRName = value;
+                    MPROperation.Name = value;
                 OnPropertyChanged("Content");
             }
         }
@@ -36,7 +36,7 @@ namespace TestWinLab
             Operation = null;
             Content = content;
             Operation = new MPROperation();
-            MPROperation.MPRName = content;
+            MPROperation.Name = content;
         }
 
         public MPROperationNode(MPROperation mprOperation)

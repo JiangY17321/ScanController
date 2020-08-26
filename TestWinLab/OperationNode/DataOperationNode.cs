@@ -9,14 +9,14 @@ namespace TestWinLab
             get
             {
                 if (DataOperation != null)
-                    return DataOperation.DataName;
+                    return DataOperation.Name;
                 return content;
             }
             set
             {
                 content = value;
                 if (DataOperation != null)
-                    DataOperation.DataName = value;
+                    DataOperation.Name = value;
                 OnPropertyChanged("Content");
             }
         }
@@ -35,7 +35,7 @@ namespace TestWinLab
             Operation = null;
             Content = content;
             Operation = new DataOperation();
-            DataOperation.DataName = content;
+            DataOperation.Name = content;
         }
 
         public DataOperationNode(DataOperation dataOperation)

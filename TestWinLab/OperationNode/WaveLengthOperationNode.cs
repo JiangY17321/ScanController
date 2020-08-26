@@ -9,14 +9,14 @@ namespace TestWinLab
             get
             {
                 if (WaveLengthOperation != null)
-                    return WaveLengthOperation.WaveLengthName;
+                    return WaveLengthOperation.Name;
                 return content;
             }
             set
             {
                 content = value;
                 if (WaveLengthOperation != null)
-                    WaveLengthOperation.WaveLengthName = value;
+                    WaveLengthOperation.Name = value;
                 OnPropertyChanged("Content");
             }
         }
@@ -36,7 +36,7 @@ namespace TestWinLab
             Operation = null;
             Content = content;
             Operation = new WaveLengthOperation();
-            WaveLengthOperation.WaveLengthName = content;
+            WaveLengthOperation.Name = content;
         }
 
         public WaveLengthOperationNode(WaveLengthOperation waveLengthOperation)

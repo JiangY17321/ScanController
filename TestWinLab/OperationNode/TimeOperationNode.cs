@@ -9,14 +9,14 @@ namespace TestWinLab
             get
             {
                 if (TimeOperation != null)
-                    return TimeOperation.TimeName;
+                    return TimeOperation.Name;
                 return content;
             }
             set
             {
                 content = value;
                 if (TimeOperation != null)
-                    TimeOperation.TimeName = value;
+                    TimeOperation.Name = value;
                 OnPropertyChanged("Content");
             }
         }
@@ -35,7 +35,7 @@ namespace TestWinLab
             Operation = null;
             Content = content;
             Operation = new TimeOperation();
-            TimeOperation.TimeName = content;
+            TimeOperation.Name = content;
         }
 
         public TimeOperationNode(TimeOperation timeOperation)

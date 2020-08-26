@@ -10,14 +10,14 @@ namespace TestWinLab
             get
             {
                 if (FastScanParamOperation != null)
-                    return FastScanParamOperation.GeneralParamName;
+                    return FastScanParamOperation.Name;
                 return content;
             }
             set
             {
                 content = value;
                 if (FastScanParamOperation != null)
-                    FastScanParamOperation.GeneralParamName = value;
+                    FastScanParamOperation.Name = value;
                 OnPropertyChanged("Content");
             }
         }
@@ -72,7 +72,7 @@ namespace TestWinLab
             Operation = null;
             Content = content;
             Operation = new FastScanParamOperation();
-            FastScanParamOperation.GeneralParamName = content;
+            FastScanParamOperation.Name = content;
         }
 
         public FastScanParamOperationNode(FastScanParamOperation fastScanParamOperation)

@@ -23,10 +23,14 @@ namespace FlowController
             {
                 if (prop.CanRead)
                 {
-                    object propVal = prop.GetValue(value, null);
-                    if (propVal != null)
+                    Attribute exportAttribute = prop.GetCustomAttribute<ExportAttribute>();
+                    if(exportAttribute!=null)
                     {
-                        jo.Add(prop.Name, JToken.FromObject(propVal, serializer));
+                        object propVal = prop.GetValue(value, null);
+                        if (propVal != null)
+                        {
+                            jo.Add(prop.Name, JToken.FromObject(propVal, serializer));
+                        }
                     }
                 }
             }

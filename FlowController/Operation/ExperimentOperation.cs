@@ -5,7 +5,6 @@
     /// </summary>
     public class ExperimentOperation:Operation
     {
-        public string ExperimentName { get; set; }
         public ExperimentOperation() : base(OperationType.Experiment)
         {
 

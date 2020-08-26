@@ -9,14 +9,14 @@ namespace TestWinLab
             get
             {
                 if (FinchScanOperation != null)
-                    return FinchScanOperation.ScanName;
+                    return FinchScanOperation.Name;
                 return content;
             }
             set
             {
                 content = value;
                 if (FinchScanOperation != null)
-                    FinchScanOperation.ScanName = value;
+                    FinchScanOperation.Name = value;
                 OnPropertyChanged("Content");
             }
         }
@@ -36,7 +36,7 @@ namespace TestWinLab
             Operation = null;
             Content = content;
             Operation = new FinchScanOperation();
-            FinchScanOperation.ScanName = content;
+            FinchScanOperation.Name = content;
         }
 
         public FinchScanOperationNode(FinchScanOperation finchScanOperation)

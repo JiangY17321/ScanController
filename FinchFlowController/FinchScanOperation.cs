@@ -1,16 +1,14 @@
 ﻿using FlowController;
+using System.Collections.Generic;
 
 namespace FinchFlowController
 {
     public class FinchScanOperation:ScanOperation
     {
-        public int ScanSpeed { get; set; }
-
-        public int Resolution { get; set; }
-
+        private List<double> dataList;
         public FinchScanOperation()
         {
-           
+            dataList = new List<double>();
         }
 
         public override bool Run()
@@ -34,6 +32,7 @@ namespace FinchFlowController
         public override void DataReceived_SinglePoint(double value)
         {
             System.Diagnostics.Debug.WriteLine("SinglePoint:"+value);
+            dataList.Add(value);
         }
     }
 }

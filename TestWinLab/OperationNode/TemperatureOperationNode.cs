@@ -9,14 +9,14 @@ namespace TestWinLab
             get
             {
                 if (TemperatureOperation != null)
-                    return TemperatureOperation.TemperatureName;
+                    return TemperatureOperation.Name;
                 return content;
             }
             set
             {
                 content = value;
                 if (TemperatureOperation != null)
-                    TemperatureOperation.TemperatureName = value;
+                    TemperatureOperation.Name = value;
                 OnPropertyChanged("Content");
             }
         }
@@ -36,7 +36,7 @@ namespace TestWinLab
             Operation = null;
             Content = content;
             Operation = new TemperatureOperation();
-            TemperatureOperation.TemperatureName = content;
+            TemperatureOperation.Name = content;
         }
 
         public TemperatureOperationNode(TemperatureOperation temperatureOperation)
