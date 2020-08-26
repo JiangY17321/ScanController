@@ -10,5 +10,49 @@
         {
 
         }
+
+
+        public virtual void ScanCompelete()
+        {
+
+        }
+
+        public virtual void ScanFailed(int errorNum)
+        {
+
+        }
+
+        public virtual void ScanAbort()
+        {
+
+        }
+        public virtual void ScanHalted()
+        {
+
+        }
+
+
+        /// <summary>
+        /// auto-get the data from InstCtrl 
+        /// </summary>
+        public virtual void DataReceived_AutoGet()
+        {
+
+        }
+
+        public virtual void DataReceived_SinglePoint(double value)
+        {
+
+        }
+
+        public virtual void DataReceived_DoublePoint(double xValue, double yValue)
+        {
+
+        }
+
+        public virtual void DataReceived_DoublePoint_Arrays(double[] xValues, double[] yValues)
+        {
+
+        }
     }
 }

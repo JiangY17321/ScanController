@@ -30,7 +30,7 @@ namespace FinchFlowController
 
 
         private InstCtrl instCtrl;
-        private IInstctrlScanCallBack instCtrlCallBack;
+        private ScanOperation currentScanOperation;
 
         public void SetInstCtrl(InstCtrl instCtrl)
         {
@@ -55,17 +55,17 @@ namespace FinchFlowController
 
         private void ScanCompelete()
         {
-            if(instCtrlCallBack!=null)
+            if(currentScanOperation != null)
             {
-                instCtrlCallBack.ScanCompelete();
+                currentScanOperation.ScanCompelete();
             }
         }
 
         private void ScanFailed()
         {
-            if (instCtrlCallBack != null)
+            if (currentScanOperation != null)
             {
-                instCtrlCallBack.ScanFailed();
+                currentScanOperation.ScanFailed(0);
             }
         }
 
@@ -74,41 +74,41 @@ namespace FinchFlowController
         /// </summary>
         private void DataReceived_AutoGet()
         {
-            if (instCtrlCallBack != null)
+            if (currentScanOperation != null)
             {
-                instCtrlCallBack.DataReceived_AutoGet();
+                currentScanOperation.DataReceived_AutoGet();
             }
         }
 
         private void DataReceived_SinglePoint(double value)
         {
-            if (instCtrlCallBack != null)
+            if (currentScanOperation != null)
             {
-                instCtrlCallBack.DataReceived_SinglePoint(value);
+                currentScanOperation.DataReceived_SinglePoint(value);
             }
         }
 
         private void DataReceived_DoublePoint(double xValue, double yValue)
         {
-            if (instCtrlCallBack != null)
+            if (currentScanOperation != null)
             {
-                instCtrlCallBack.DataReceived_DoublePoint(xValue, yValue);
+                currentScanOperation.DataReceived_DoublePoint(xValue, yValue);
             }
         }
 
         private void DataReceived_DoublePoint_Arrays(double[] xValues, double[] yValues)
         {
-            if (instCtrlCallBack != null)
+            if (currentScanOperation != null)
             {
-                instCtrlCallBack.DataReceived_DoublePoint_Arrays(xValues, yValues);
+                currentScanOperation.DataReceived_DoublePoint_Arrays(xValues, yValues);
             }
         }
 
-        public void PerformScan_SinglePoint(IInstctrlScanCallBack instCtrlCallBack)
+        public void PerformScan_SinglePoint(ScanOperation scanOperation)
         {
             if(instCtrl!=null)
             {
-                this.instCtrlCallBack = instCtrlCallBack;
+                currentScanOperation = scanOperation;
                 instCtrl.PerformScan_SinglePoint();
             }
         }
