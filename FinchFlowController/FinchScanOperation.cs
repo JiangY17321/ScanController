@@ -3,7 +3,7 @@ using SimInstCtrl;
 
 namespace FinchFlowController
 {
-    public class FinchScanOperation:ScanOperation
+    public class FinchScanOperation:ScanOperation, IInstctrlSetter
     {
 
         public int ScanSpeed { get; set; }
@@ -16,8 +16,17 @@ namespace FinchFlowController
            
         }
 
-        public void Init(InstCtrl instCtrl)
+        public void SetInstCtrl(InstCtrl instCtrl)
         {
+            if (this.instCtrl!=null)
+            {
+                this.instCtrl.ScanCompelete_CallBack -= ScanCompelete;
+                this.instCtrl.ScanFailed_CallBack -= ScanFailed;
+                this.instCtrl.AutoGet_CallBack -= DataReceived_AutoGet;
+                this.instCtrl.SinglePoint_CallBack -= DataReceived_SinglePoint;
+                this.instCtrl.DoublePoint_CallBack -= DataReceived_DoublePoint;
+                this.instCtrl.DoublePoint_Arrays_CallBack -= DataReceived_DoublePoint_Arrays;
+            }
             this.instCtrl = instCtrl;
             instCtrl.ScanCompelete_CallBack += ScanCompelete;
             instCtrl.ScanFailed_CallBack += ScanFailed;
@@ -26,6 +35,7 @@ namespace FinchFlowController
             instCtrl.DoublePoint_CallBack += DataReceived_DoublePoint;
             instCtrl.DoublePoint_Arrays_CallBack += DataReceived_DoublePoint_Arrays;
         }
+
 
 
         public override bool Run()

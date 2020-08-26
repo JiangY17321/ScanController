@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="FastScanParamOperation.cs" />
     <Compile Include="FinchScanOperation.cs" />
+    <Compile Include="IInstctrlSetter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
