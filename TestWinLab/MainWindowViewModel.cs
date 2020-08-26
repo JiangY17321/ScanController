@@ -117,6 +117,7 @@ namespace TestWinLab
 
         private void Run(object param)
         {
+            InstCtrlHandler.GetInstance().SetInstCtrl(instCtrl);
             List<Operation> opeartionList = new List<Operation>();
             foreach(OperationNode operationNode in operationNodes)
             {
@@ -125,7 +126,6 @@ namespace TestWinLab
                 {
                     opeartionList.Add(operation);
                 }
-                SetInstCtrlForOperations(operationNode);
             }
 
             Thread thread = new Thread(() =>
@@ -139,20 +139,6 @@ namespace TestWinLab
                   }
               }){ IsBackground = true };
             thread.Start();
-        }
-
-        private void SetInstCtrlForOperations(OperationNode operationNode)
-        {
-            if (operationNode == null) return;
-            IInstctrlSetter instCtrlSettr = operationNode.Operation as IInstctrlSetter;
-            if ( instCtrlSettr!= null)
-            {
-                instCtrlSettr.SetInstCtrl(instCtrl);
-            }
-            foreach(OperationNode childNode in operationNode.Children)
-            {
-                SetInstCtrlForOperations(childNode);
-            }
         }
 
         private bool CanRun(object param)

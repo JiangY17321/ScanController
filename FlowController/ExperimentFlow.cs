@@ -90,7 +90,7 @@ namespace FlowController
             try
             {
                 if (operation == null) return;
-                operation.Run();
+                operation.StartRun();
                 foreach (Operation subOperation in operation.ChildOperations)
                 {
                     RunOperation(subOperation);

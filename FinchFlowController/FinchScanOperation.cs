@@ -3,55 +3,36 @@ using SimInstCtrl;
 
 namespace FinchFlowController
 {
-    public class FinchScanOperation:ScanOperation, IInstctrlSetter
+    public class FinchScanOperation:ScanOperation, IInstctrlScanCallBack
     {
 
         public int ScanSpeed { get; set; }
 
         public int Resolution { get; set; }
 
-        private InstCtrl instCtrl;
         public FinchScanOperation()
         {
            
         }
 
-        public void SetInstCtrl(InstCtrl instCtrl)
-        {
-            if (this.instCtrl!=null)
-            {
-                this.instCtrl.ScanCompelete_CallBack -= ScanCompelete;
-                this.instCtrl.ScanFailed_CallBack -= ScanFailed;
-                this.instCtrl.AutoGet_CallBack -= DataReceived_AutoGet;
-                this.instCtrl.SinglePoint_CallBack -= DataReceived_SinglePoint;
-                this.instCtrl.DoublePoint_CallBack -= DataReceived_DoublePoint;
-                this.instCtrl.DoublePoint_Arrays_CallBack -= DataReceived_DoublePoint_Arrays;
-            }
-            this.instCtrl = instCtrl;
-            instCtrl.ScanCompelete_CallBack += ScanCompelete;
-            instCtrl.ScanFailed_CallBack += ScanFailed;
-            instCtrl.AutoGet_CallBack += DataReceived_AutoGet;
-            instCtrl.SinglePoint_CallBack += DataReceived_SinglePoint;
-            instCtrl.DoublePoint_CallBack += DataReceived_DoublePoint;
-            instCtrl.DoublePoint_Arrays_CallBack += DataReceived_DoublePoint_Arrays;
-        }
 
 
 
         public override bool Run()
         {
             System.Diagnostics.Debug.WriteLine("FinchScanOperation Start Data collection");
-            instCtrl.PerformScan_SinglePoint();
+            InstCtrlHandler.GetInstance().PerformScan_SinglePoint(this);
             return true;
         }
 
 
-        private void ScanCompelete()
+        public void ScanCompelete()
         {
             System.Diagnostics.Debug.WriteLine("ScanCompelete!");
+            RunFinished();
         }
 
-        private void ScanFailed()
+        public void ScanFailed()
         {
             System.Diagnostics.Debug.WriteLine("ScanFailed!!!");
         }
@@ -59,22 +40,22 @@ namespace FinchFlowController
         /// <summary>
         /// auto-get the data from InstCtrl 
         /// </summary>
-        private void DataReceived_AutoGet()
+        public void DataReceived_AutoGet()
         {
 
         }
 
-        private void DataReceived_SinglePoint(double value)
+        public void DataReceived_SinglePoint(double value)
         {
             System.Diagnostics.Debug.WriteLine("SinglePoint:"+value);
         }
 
-        private void DataReceived_DoublePoint(double xValue, double yValue)
+        public void DataReceived_DoublePoint(double xValue, double yValue)
         {
 
         }
 
-        private void DataReceived_DoublePoint_Arrays(double[] xValues, double[] yValues)
+        public void DataReceived_DoublePoint_Arrays(double[] xValues, double[] yValues)
         {
 
         }
