@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Threading;
 
 namespace FlowController
@@ -15,7 +15,7 @@ namespace FlowController
         public OperationType OperationType { get; }
 
         [Export]
-        public List<Operation> ChildOperations { get; set; }
+        public ObservableCollection<Operation> ChildOperations { get; set; }
 
         [Export]
         public string Name { get; set; }
@@ -24,7 +24,7 @@ namespace FlowController
         private static ManualResetEvent manualResetEvent;
         public bool IsRunning { get; private set; }
 
-        public Operation Parent { get; set; }
+        public Operation Parent { get; private set; }
 
         /// <summary>
         /// level of root node is 0, level of root node's child is 1; 
@@ -47,8 +47,23 @@ namespace FlowController
         public Operation(OperationType operationType)
         {
             OperationType = operationType;
-            ChildOperations = new List<Operation>();
+            ChildOperations = new ObservableCollection<Operation>();
+            ChildOperations.CollectionChanged += ChildOperations_CollectionChanged;
             IsRunning = false;
+        }
+
+        private void ChildOperations_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            if(e.Action==System.Collections.Specialized.NotifyCollectionChangedAction.Add)
+            {
+                foreach(Operation operation in e.NewItems)
+                {
+                    if(operation!=null)
+                    {
+                        operation.Parent = this;
+                    }
+                }
+            }
         }
 
         internal bool StartRun()
@@ -116,7 +131,11 @@ namespace FlowController
 
         public bool IsUnderBackgroundOperation()
         {
-
+            Operation dataOperation = GetParentOperationByType(typeof(DataOperation));
+            Operation backgrounddataOperation = GetParentOperationByType(typeof(BackgroundDataOperation));
+            if (backgrounddataOperation == null) return false;
+            if (dataOperation == null) return true;
+            return backgrounddataOperation.Level > dataOperation.Level;
         }
     }
 }
