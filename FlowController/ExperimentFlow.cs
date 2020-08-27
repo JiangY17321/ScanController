@@ -1,5 +1,4 @@
 ﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
 using System;
 using System.IO;
 using System.Text;
@@ -66,7 +65,6 @@ namespace FlowController
                 experimentProcessingThread.Start();
             }
             threadCreatingMutex.ReleaseMutex();
-
             return true;
         }
 

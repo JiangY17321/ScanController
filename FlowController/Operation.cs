@@ -26,6 +26,24 @@ namespace FlowController
 
         public Operation Parent { get; set; }
 
+        /// <summary>
+        /// level of root node is 0, level of root node's child is 1; 
+        /// </summary>
+        public int Level
+        {
+            get
+            {
+                int currentLevel = 0;
+                Operation temp = Parent;
+                while(temp!=null)
+                {
+                    currentLevel++;
+                    temp = temp.Parent;
+                }
+                return currentLevel;
+            }
+        }
+
         public Operation(OperationType operationType)
         {
             OperationType = operationType;
@@ -56,6 +74,49 @@ namespace FlowController
         protected void RunFinished()
         {
             manualResetEvent.Set();
+        }
+
+        public Operation GetParentOperationByType(Type operationType)
+        {
+            Operation currentOperation = Parent;
+            while(currentOperation!=null)
+            {
+                if(currentOperation.GetType()== operationType ||
+                    operationType.GetType().IsSubclassOf(operationType))
+                {
+                    return currentOperation;
+                }
+                currentOperation = currentOperation.Parent;
+            }
+            return null;
+        }
+
+        public Operation GetLastSiblingOperationByType(Type operationType)
+        {
+            return GetLastSiblingOperationByType(this, operationType);
+        }
+
+        private static Operation GetLastSiblingOperationByType(Operation self, Type operationType)
+        {
+            if (self == null) return null;
+            if (self.Parent == null) return null;
+            int index = self.Parent.ChildOperations.IndexOf(self);
+            if (index == -1) return null;
+            for(int i=index;i>=0;i--)
+            {
+                if (self.Parent.ChildOperations[i] == null) continue;
+                Type siblingType = self.Parent.ChildOperations[i].GetType();
+                if(siblingType== operationType || operationType.IsSubclassOf(siblingType))
+                {
+                    return self.Parent.ChildOperations[i];
+                }
+            }
+            return GetLastSiblingOperationByType(self.Parent, operationType);
+        }
+
+        public bool IsUnderBackgroundOperation()
+        {
+
         }
     }
 }
