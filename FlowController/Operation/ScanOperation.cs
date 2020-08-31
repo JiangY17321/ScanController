@@ -53,5 +53,21 @@
         {
 
         }
+
+        public Sample CreateSampleScanResult(ScannedData scannedData)
+        {
+            SampleOperation sampleOperation = GetParentOperationByType(typeof(SampleOperation)) as SampleOperation;
+            if (sampleOperation != null)
+            {
+                SampleCurve sampleCurve = new SampleCurve();
+                sampleCurve.CurveName = sampleOperation.Name;
+                sampleCurve.SampleCurveData = new DimensionDataPoint(scannedData);
+
+                Sample sample = new Sample();
+                sample.AddCurve(sampleCurve);
+                return sample;
+            }
+            return null;
+        }
     }
 }

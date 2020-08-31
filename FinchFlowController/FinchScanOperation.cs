@@ -21,6 +21,8 @@ namespace FinchFlowController
         public override void ScanCompelete()
         {
             System.Diagnostics.Debug.WriteLine("ScanCompelete!");
+            Sample sample = CreateSampleScanResult(new ScannedData(dataList));
+            //TODO
             RunFinished();
         }
 

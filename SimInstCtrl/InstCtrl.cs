@@ -39,7 +39,7 @@ namespace SimInstCtrl
                   Thread.Sleep(1000);
                   for(int i=0;i<200;i++)
                   {
-                      Thread.Sleep(50);
+                      Thread.Sleep(20);
                       Random random = new Random((int)DateTime.Now.Ticks);
                       int start = Math.Abs(i - 100);
                       SinglePoint_CallBack?.Invoke(random.Next(start, 100 + start));
