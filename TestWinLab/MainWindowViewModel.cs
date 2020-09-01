@@ -261,7 +261,6 @@ namespace TestWinLab
             }
         }
 
-
         public void OpenOperationTreeFile(string fileName)
         {
             ExperimentOperation experimentOperation = ExperimentFlow.GetInstance().LoadOperationTreeFromFile(fileName);
