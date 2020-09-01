@@ -137,5 +137,19 @@ namespace FlowController
             if (dataOperation == null) return true;
             return backgrounddataOperation.Level > dataOperation.Level;
         }
+
+        protected virtual void ProcessSampleBeforeHandingOver(Sample sample)
+        {
+
+        }
+
+        public void HandOverSampleToParent(Sample sample)
+        {
+            if(Parent!=null)
+            {
+                Parent.ProcessSampleBeforeHandingOver(sample);
+                Parent.HandOverSampleToParent(sample);
+            }
+        }
     }
 }

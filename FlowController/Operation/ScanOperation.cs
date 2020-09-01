@@ -69,5 +69,12 @@
             }
             return null;
         }
+
+        protected void ScanFinished(Sample sample)
+        {
+            HandOverSampleToParent(sample);
+            RunFinished();
+
+        }
     }
 }

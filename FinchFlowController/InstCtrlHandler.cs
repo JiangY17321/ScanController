@@ -5,6 +5,7 @@ namespace FinchFlowController
 {
     public class InstCtrlHandler
     {
+        #region Singleton
         static InstCtrlHandler instCtrlHandler = null;
         /// <summary>
         /// Thread synchronization object for calls to this object
@@ -27,9 +28,9 @@ namespace FinchFlowController
             }
             return instCtrlHandler;
         }
+        #endregion
 
-
-        private InstCtrl instCtrl;
+        
         private ScanOperation currentScanOperation;
 
         public void SetInstCtrl(InstCtrl instCtrl)
