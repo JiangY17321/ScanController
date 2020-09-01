@@ -28,14 +28,12 @@ namespace TestWinLab
 
         public ICommand RunCommand { get; }
 
-        private InstCtrl instCtrl;
 
         public MainWindowViewModel()
         {
             operationNodes = new ObservableCollection<OperationNode>();
             CreateOperationCommand = new RelayCommand(CanCreateOperation, CreateOperation);
             RunCommand= new RelayCommand(CanRun, Run);
-            instCtrl = new InstCtrl();
         }
 
         private void CreateOperation(object param)
@@ -117,7 +115,6 @@ namespace TestWinLab
 
         private void Run(object param)
         {
-            InstCtrlHandler.GetInstance().SetInstCtrl(instCtrl);
             List<Operation> opeartionList = new List<Operation>();
             foreach(OperationNode operationNode in operationNodes)
             {

@@ -14,7 +14,7 @@ namespace FinchFlowController
         public override bool Run()
         {
             System.Diagnostics.Debug.WriteLine("FinchScanOperation Start Data collection");
-            InstCtrlHandler.GetInstance().PerformScan_SinglePoint(this);
+            InstCtrlWrapper.GetInstance().PerformScan_SinglePoint(this);
             return true;
         }
 
