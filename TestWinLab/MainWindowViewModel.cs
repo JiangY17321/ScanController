@@ -244,7 +244,6 @@ namespace TestWinLab
                     operationNode.Children.Add(childOperationNode);
                 }
             }
-
             return operationNode;
         }
 
@@ -274,7 +273,6 @@ namespace TestWinLab
                 operationNodes.Add(opeartionNode);
                 opeartionNode.IsSelected = true;
             }
-            
         }
 
         private void ExpandOperationNode(OperationNode opeartionNode)

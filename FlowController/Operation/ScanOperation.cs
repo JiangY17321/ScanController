@@ -64,6 +64,7 @@
                 sampleCurve.SampleCurveData = new DimensionDataPoint(scannedData);
 
                 Sample sample = new Sample();
+                sample.SampleName= sampleOperation.Name;
                 sample.AddCurve(sampleCurve);
                 return sample;
             }

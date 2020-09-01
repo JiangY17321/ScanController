@@ -26,5 +26,12 @@ namespace FlowController
             }
             _curves.Add(sampleCurve);
         }
+
+        public List<SampleCurve> GetCurves()
+        {
+            List<SampleCurve> sampleCurves = new List<SampleCurve>();
+            sampleCurves.AddRange(_curves);
+            return sampleCurves;
+        }
     }
 }

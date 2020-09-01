@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TestWinLab.ParamSettingPanel"
+             xmlns:d3="clr-namespace:InteractiveDataDisplay.WPF;assembly=InteractiveDataDisplay.WPF"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800" Loaded="UserControl_Loaded">
     <Grid>
@@ -11,9 +12,7 @@
             <RowDefinition Height="5"/>
             <RowDefinition Height="40"/>
             <RowDefinition Height="160"/>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="40"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="200"/>
@@ -23,10 +22,13 @@
         </Grid.ColumnDefinitions>
         <Label FontSize="13pt" Grid.Row="1" Content="Data Name:" VerticalAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Right"/>
         <TextBox FontSize="13pt" Grid.Row="1" Grid.Column="1" VerticalContentAlignment="Center" HorizontalAlignment="Stretch" Margin="0,2,0,2" Text="{Binding Content}"/>
-        <DataGrid Grid.Row="2" Grid.ColumnSpan="4" x:Name="dgSamples" AutoGenerateColumns="False" CanUserAddRows="False">
+        <DataGrid Grid.Row="2" Grid.ColumnSpan="4" x:Name="dgSamples" AutoGenerateColumns="False" CanUserAddRows="False" SelectedCellsChanged="DgSamples_SelectedCellsChanged">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Sample Name" Width="200" Binding="{Binding Path=SampleName}"/>
             </DataGrid.Columns>
         </DataGrid>
+        <d3:Chart x:Name="chart" BottomTitle="Argument" LeftTitle="Function" Grid.Row="3" Grid.ColumnSpan="10">
+            <d3:LineGraph x:Name="linegraph" Description="Simple linegraph" Stroke="Blue" StrokeThickness="3"/>
+        </d3:Chart>
     </Grid>
 </UserControl>
