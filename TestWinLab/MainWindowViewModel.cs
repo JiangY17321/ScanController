@@ -273,6 +273,7 @@ namespace TestWinLab
             {
                 operationNodes.Clear();
                 operationNodes.Add(opeartionNode);
+                opeartionNode.IsSelected = true;
             }
             
         }
