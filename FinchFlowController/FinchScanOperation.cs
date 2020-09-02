@@ -5,14 +5,18 @@ namespace FinchFlowController
 {
     public class FinchScanOperation:ScanOperation
     {
-        private List<double> dataList;
-        private List<double> xvalueList;
-        private List<double> yvalueList;
+        private class TwoDimData
+        {
+            public List<double> xvalueList;
+            public List<double> yvalueList;
+        }
+
+        private List<double> _oneDimData;
+        private TwoDimData _twoDimData;
+        private List<TwoDimData> _ThreeDimData;
+
         public FinchScanOperation()
         {
-            dataList = new List<double>();
-            xvalueList = new List<double>();
-            yvalueList = new List<double>();
         }
 
         public override bool Run()
@@ -26,8 +30,16 @@ namespace FinchFlowController
         public override void ScanCompelete()
         {
             System.Diagnostics.Debug.WriteLine("ScanCompelete!");
-            //Sample sample = CreateSampleScanResult(new ScannedData(dataList));
-            Sample sample = CreateSampleScanResult(new ScannedData(xvalueList, yvalueList));
+            Sample sample = null;
+            if(_oneDimData!=null)
+            {
+                sample = CreateSampleScanResult(new ScannedData(_oneDimData));
+            }
+            else if(_twoDimData!=null)
+            {
+                sample = CreateSampleScanResult(new ScannedData(
+                    _twoDimData.xvalueList, _twoDimData.yvalueList));
+            }
             HandOverSampleToParent(sample);
             ScanFinished(sample);
         }
@@ -40,14 +52,22 @@ namespace FinchFlowController
         public override void DataReceived_SinglePoint(double value)
         {
             System.Diagnostics.Debug.WriteLine("SinglePoint:"+value);
-            dataList.Add(value);
+            if(_oneDimData==null)
+            {
+                _oneDimData = new List<double>();
+            }
+            _oneDimData.Add(value);
         }
 
         public override void DataReceived_DoublePoint(double xValue, double yValue)
         {
             System.Diagnostics.Debug.WriteLine("DoublePoint:" + xValue + "," + yValue);
-            xvalueList.Add(xValue);
-            yvalueList.Add(yValue);
+            if(_twoDimData==null)
+            {
+                _twoDimData = new TwoDimData();
+            }
+            _twoDimData.xvalueList.Add(xValue);
+            _twoDimData.yvalueList.Add(yValue);
         }
     }
 }
