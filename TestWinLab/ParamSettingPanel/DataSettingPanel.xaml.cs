@@ -1,5 +1,6 @@
 ﻿using FlowController;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -11,10 +12,18 @@ namespace TestWinLab.ParamSettingPanel
     public partial class DataSettingPanel : UserControl
     {
         private SampleEntry _lastSampleEntry;
+
+        public ObservableCollection<double> Z_DimValues { get; set; }
+
+        private DimensionDataPoint _currrentDimensionDataPoint;
+
+
         public DataSettingPanel()
         {
             InitializeComponent();
             _lastSampleEntry = null;
+            Z_DimValues = new ObservableCollection<double>();
+            _currrentDimensionDataPoint = null;
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
@@ -47,14 +56,46 @@ namespace TestWinLab.ParamSettingPanel
         {
             if (sampleCurve == null) return;
             DimensionDataPoint dimensionDataPoint = sampleCurve.SampleCurveData;
-            ScannedData scannedData = dimensionDataPoint.ScannedData;
+            if(dimensionDataPoint.ScannedData!=null)
+            {
+                ScannedData scannedData = dimensionDataPoint.ScannedData;
+                ShowScannnedData(scannedData);
+            }
+            else if(dimensionDataPoint.DimensionDataList!=null)
+            {
+                Z_DimValues.Clear();
+                for (int i=0;i< dimensionDataPoint.DimensionDataList.Count; i++)
+                {
+                    Z_DimValues.Add(dimensionDataPoint.DimensionDataList[i].Value);
+                }
+                cbDimZValue.ItemsSource = Z_DimValues;
+                cbDimZValue.SelectedIndex = 0;
+                _currrentDimensionDataPoint = dimensionDataPoint;
+                CbDimZValue_SelectionChanged(null, null);
+            }
+        }
+
+        private void ShowScannedData(DimensionDataPoint dimensionDataPoint,int index)
+        {
+            if (dimensionDataPoint == null) return;
+            if (dimensionDataPoint.DimensionDataList == null) return;
+            if (index < 0 || index >= dimensionDataPoint.DimensionDataList.Count) return;
+            ShowScannnedData(dimensionDataPoint.DimensionDataList[index].ScannedData);
+        }
+
+        private void CbDimZValue_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ShowScannedData(_currrentDimensionDataPoint, cbDimZValue.SelectedIndex);
+        }
+
+        private void ShowScannnedData(ScannedData scannedData)
+        {
             if (scannedData == null) return;
 
             List<double> indexList = new List<double>();
-            List<double> xAxisData = null;
-            List<double> yAxisData = null;
-
-            if (scannedData.dim2Data!=null)
+            List<double> xAxisData;
+            List<double> yAxisData;
+            if (scannedData.dim2Data != null)
             {
                 indexList.AddRange(scannedData.dim2Data);
                 xAxisData = scannedData.dim1Data;
@@ -71,5 +112,7 @@ namespace TestWinLab.ParamSettingPanel
             }
             linegraph.Plot(xAxisData, yAxisData); // x and y are IEnumerable<double>
         }
+
+       
     }
 }

@@ -38,10 +38,10 @@ namespace SimInstCtrl
             Thread thread = new Thread(() =>
               {
                   Thread.Sleep(1000);
-                  for(int i=0;i<200;i++)
+                  Random random = new Random((int)DateTime.Now.Ticks);
+                  for (int i=0;i<200;i++)
                   {
                       Thread.Sleep(20);
-                      Random random = new Random((int)DateTime.Now.Ticks);
                       int start = Math.Abs(i - 100);
                       SinglePoint_CallBack?.Invoke(random.Next(start, 100 + start));
                   }
@@ -58,10 +58,10 @@ namespace SimInstCtrl
             Thread thread = new Thread(() =>
             {
                 Thread.Sleep(1000);
+                Random random = new Random((int)DateTime.Now.Ticks);
                 for (int i = 0; i < 200; i++)
                 {
                     Thread.Sleep(20);
-                    Random random = new Random((int)DateTime.Now.Ticks);
                     int start = Math.Abs(i - 100);
                     int index = i * 10;
                     DoublePoint_CallBack?.Invoke(index, random.Next(start, 100 + start));
@@ -77,6 +77,7 @@ namespace SimInstCtrl
             Thread thread = new Thread(() =>
             {
                 Thread.Sleep(1000);
+                Random random = new Random((int)DateTime.Now.Ticks);
                 for(int j=0;j<10;j++)
                 {
                     List<double> xValues = new List<double>();
@@ -84,7 +85,6 @@ namespace SimInstCtrl
                     for (int i = 0; i < 200; i++)
                     {
                         //Thread.Sleep(20);
-                        Random random = new Random((int)DateTime.Now.Ticks);
                         int start = Math.Abs(i - 100);
                         int index = i * 10;
                         xValues.Add(index);
