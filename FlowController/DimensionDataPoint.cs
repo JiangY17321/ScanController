@@ -16,6 +16,11 @@ namespace FlowController
         {
             ScannedData = scannedData;
             DimensionDataList = null;
+
+            if(scannedData==null)
+            {
+                DimensionDataList = new List<DimensionDataPoint>();
+            }
         }
     }
 }

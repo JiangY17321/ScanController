@@ -9,11 +9,17 @@ namespace FinchFlowController
         {
             public List<double> xvalueList;
             public List<double> yvalueList;
+
+            public TwoDimData()
+            {
+                xvalueList = new List<double>();
+                yvalueList = new List<double>();
+            }
         }
 
         private List<double> _oneDimData;
         private TwoDimData _twoDimData;
-        private List<TwoDimData> _ThreeDimData;
+        private List<TwoDimData> _threeDimData;
 
         public FinchScanOperation()
         {
@@ -23,7 +29,8 @@ namespace FinchFlowController
         {
             System.Diagnostics.Debug.WriteLine("FinchScanOperation Start Data collection");
             //InstCtrlWrapper.GetInstance().PerformScan_SinglePoint(this);
-            InstCtrlWrapper.GetInstance().PerformScan_DoublePoint(this);
+            //InstCtrlWrapper.GetInstance().PerformScan_DoublePoint(this);
+            InstCtrlWrapper.GetInstance().PerformScan_DoublePointArray(this);
             return true;
         }
 
@@ -39,6 +46,18 @@ namespace FinchFlowController
             {
                 sample = CreateSampleScanResult(new ScannedData(
                     _twoDimData.xvalueList, _twoDimData.yvalueList));
+            }
+            else if(_threeDimData!=null)
+            {
+                DimensionDataPoint dimensionDataPoint3D = new DimensionDataPoint(null);
+                for (int i=0;i< _threeDimData.Count;i++)
+                {
+                    ScannedData scannedData = new ScannedData(_threeDimData[i].xvalueList, _threeDimData[i].yvalueList);
+                    DimensionDataPoint dimensionDataPoint = new DimensionDataPoint(scannedData);
+                    dimensionDataPoint.Value = i;
+                    dimensionDataPoint3D.DimensionDataList.Add(dimensionDataPoint);
+                }
+                sample = CreateSampleScanResult(dimensionDataPoint3D);
             }
             HandOverSampleToParent(sample);
             ScanFinished(sample);
@@ -68,6 +87,19 @@ namespace FinchFlowController
             }
             _twoDimData.xvalueList.Add(xValue);
             _twoDimData.yvalueList.Add(yValue);
+        }
+
+        public override void DataReceived_DoublePoint_Arrays(double[] xValues, double[] yValues)
+        {
+            if(_threeDimData==null)
+            {
+                _threeDimData = new List<TwoDimData>();
+            }
+
+            TwoDimData twoDimData = new TwoDimData();
+            twoDimData.xvalueList.AddRange(xValues);
+            twoDimData.yvalueList.AddRange(yValues);
+            _threeDimData.Add(twoDimData);
         }
     }
 }

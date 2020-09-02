@@ -71,6 +71,23 @@
             return null;
         }
 
+        public Sample CreateSampleScanResult(DimensionDataPoint dimensionDataPoint)
+        {
+            SampleOperation sampleOperation = GetParentOperationByType(typeof(SampleOperation)) as SampleOperation;
+            if (sampleOperation != null)
+            {
+                SampleCurve sampleCurve = new SampleCurve();
+                sampleCurve.CurveName = sampleOperation.Name;
+                sampleCurve.SampleCurveData = dimensionDataPoint;
+
+                Sample sample = new Sample();
+                sample.SampleName = sampleOperation.Name;
+                sample.AddCurve(sampleCurve);
+                return sample;
+            }
+            return null;
+        }
+
         protected void ScanFinished(Sample sample)
         {
             HandOverSampleToParent(sample);

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading;
 
 namespace SimInstCtrl
@@ -64,6 +65,32 @@ namespace SimInstCtrl
                     int start = Math.Abs(i - 100);
                     int index = i * 10;
                     DoublePoint_CallBack?.Invoke(index, random.Next(start, 100 + start));
+                }
+                ScanCompelete_CallBack?.Invoke();
+            })
+            { IsBackground = true };
+            thread.Start();
+        }
+
+        public void PerformScan_DoublePointArray()
+        {
+            Thread thread = new Thread(() =>
+            {
+                Thread.Sleep(1000);
+                for(int j=0;j<10;j++)
+                {
+                    List<double> xValues = new List<double>();
+                    List<double> yValues = new List<double>();
+                    for (int i = 0; i < 200; i++)
+                    {
+                        //Thread.Sleep(20);
+                        Random random = new Random((int)DateTime.Now.Ticks);
+                        int start = Math.Abs(i - 100);
+                        int index = i * 10;
+                        xValues.Add(index);
+                        yValues.Add(random.Next(start, 100 + start));
+                    }
+                    DoublePoint_Arrays_CallBack?.Invoke(xValues.ToArray(), yValues.ToArray());
                 }
                 ScanCompelete_CallBack?.Invoke();
             })
