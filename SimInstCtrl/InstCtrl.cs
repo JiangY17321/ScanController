@@ -51,5 +51,24 @@ namespace SimInstCtrl
             { IsBackground = true};
             thread.Start();
         }
+
+        public void PerformScan_DoublePoint()
+        {
+            Thread thread = new Thread(() =>
+            {
+                Thread.Sleep(1000);
+                for (int i = 0; i < 200; i++)
+                {
+                    Thread.Sleep(20);
+                    Random random = new Random((int)DateTime.Now.Ticks);
+                    int start = Math.Abs(i - 100);
+                    int index = i * 10;
+                    DoublePoint_CallBack?.Invoke(index, random.Next(start, 100 + start));
+                }
+                ScanCompelete_CallBack?.Invoke();
+            })
+            { IsBackground = true };
+            thread.Start();
+        }
     }
 }

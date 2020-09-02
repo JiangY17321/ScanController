@@ -167,5 +167,16 @@ namespace FinchFlowController
             }), null);
             return true;
         }
+
+        public bool PerformScan_DoublePoint(ScanOperation scanOperation)
+        {
+            if (_instCtrl == null) return false;
+            _currentScanOperation = scanOperation;
+            _staThread.Invoke(new NoReturnAndParamDelegate(() =>
+            {
+                _instCtrl.PerformScan_DoublePoint();
+            }), null);
+            return true;
+        }
     }
 }

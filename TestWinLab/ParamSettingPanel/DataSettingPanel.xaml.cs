@@ -51,11 +51,25 @@ namespace TestWinLab.ParamSettingPanel
             if (scannedData == null) return;
 
             List<double> indexList = new List<double>();
-            for(int i=0;i< scannedData.dim1Data.Count;i++)
+            List<double> xAxisData = null;
+            List<double> yAxisData = null;
+
+            if (scannedData.dim2Data!=null)
             {
-                indexList.Add(i + 1);
+                indexList.AddRange(scannedData.dim2Data);
+                xAxisData = scannedData.dim1Data;
+                yAxisData = scannedData.dim2Data;
             }
-            linegraph.Plot(indexList, scannedData.dim1Data); // x and y are IEnumerable<double>
+            else
+            {
+                for (int i = 0; i < scannedData.dim1Data.Count; i++)
+                {
+                    indexList.Add(i + 1);
+                }
+                xAxisData = indexList;
+                yAxisData = scannedData.dim1Data;
+            }
+            linegraph.Plot(xAxisData, yAxisData); // x and y are IEnumerable<double>
         }
     }
 }
