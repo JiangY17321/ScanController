@@ -22,6 +22,15 @@ namespace FlowController
             {
                 sampleResultData.Add(sample.SampleName, sample);
             }
+            else
+            {
+                Sample existSample = sampleResultData[sample.SampleName];
+                List<string> differentParamStrings = new List<string>();
+                if(sample.IsGroupParamsEqual(existSample, differentParamStrings))
+                {
+                    //Discard the sample with same params 
+                }
+            }
         }
 
         public List<SampleCurve> GetSampleCurves(string sampleName)

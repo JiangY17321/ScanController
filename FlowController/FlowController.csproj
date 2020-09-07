@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DimensionDataPoint.cs" />
+    <Compile Include="GroupParam.cs" />
     <Compile Include="ScannedData.cs" />
     <Compile Include="OperationConverter.cs" />
     <Compile Include="Operation\BackgroundDataOperation.cs" />

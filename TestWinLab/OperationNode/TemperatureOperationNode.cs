@@ -21,6 +21,23 @@ namespace TestWinLab
             }
         }
 
+        public double Temperature
+        {
+            get
+            {
+                if (TemperatureOperation != null)
+                    return TemperatureOperation.Temperature;
+                return temperature;
+            }
+            set
+            {
+                temperature = value;
+                if (TemperatureOperation != null)
+                    TemperatureOperation.Temperature = value;
+                OnPropertyChanged("Temperature");
+            }
+        }
+
         public TemperatureOperation TemperatureOperation
         {
             get
@@ -29,6 +46,7 @@ namespace TestWinLab
             }
         }
 
+        private double temperature;
 
         public TemperatureOperationNode(string content)
         {

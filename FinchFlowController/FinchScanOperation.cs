@@ -28,9 +28,9 @@ namespace FinchFlowController
         public override bool Run()
         {
             System.Diagnostics.Debug.WriteLine("FinchScanOperation Start Data collection");
-            //InstCtrlWrapper.GetInstance().PerformScan_SinglePoint(this);
+            InstCtrlWrapper.GetInstance().PerformScan_SinglePoint(this);
             //InstCtrlWrapper.GetInstance().PerformScan_DoublePoint(this);
-            InstCtrlWrapper.GetInstance().PerformScan_DoublePointArray(this);
+            //InstCtrlWrapper.GetInstance().PerformScan_DoublePointArray(this);
             return true;
         }
 
@@ -59,7 +59,6 @@ namespace FinchFlowController
                 }
                 sample = CreateSampleScanResult(dimensionDataPoint3D);
             }
-            HandOverSampleToParent(sample);
             ScanFinished(sample);
         }
 

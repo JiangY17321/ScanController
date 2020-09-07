@@ -92,7 +92,6 @@
         {
             HandOverSampleToParent(sample);
             RunFinished();
-
         }
     }
 }

@@ -23,5 +23,8 @@
         </Grid.ColumnDefinitions>
         <Label FontSize="13pt" Grid.Row="1" Content="Temperature Name:" VerticalAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Right"/>
         <TextBox FontSize="13pt" Grid.Row="1" Grid.Column="1" VerticalContentAlignment="Center" HorizontalAlignment="Stretch" Margin="0,2,0,2" Text="{Binding Content}"/>
+
+        <Label FontSize="13pt" Grid.Row="2" Content="Temperature:" VerticalAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Right"/>
+        <TextBox FontSize="13pt" Grid.Row="2" Grid.Column="1" VerticalContentAlignment="Center" HorizontalAlignment="Stretch" Margin="0,2,0,2" Text="{Binding Temperature}"/>
     </Grid>
 </UserControl>
