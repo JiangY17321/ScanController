@@ -49,12 +49,12 @@ namespace FinchFlowController
             }
             else if(_threeDimData!=null)
             {
-                DimensionDataPoint dimensionDataPoint3D = new DimensionDataPoint(null);
+                DimensionDataPoint dimensionDataPoint3D = new DimensionDataPoint();
                 for (int i=0;i< _threeDimData.Count;i++)
                 {
-                    ScannedData scannedData = new ScannedData(_threeDimData[i].xvalueList, _threeDimData[i].yvalueList);
-                    DimensionDataPoint dimensionDataPoint = new DimensionDataPoint(scannedData);
-                    dimensionDataPoint.Value = i;
+                    DimensionDataPoint dimensionDataPoint = new DimensionDataPoint();
+                    dimensionDataPoint.ScannedData = new ScannedData(_threeDimData[i].xvalueList, _threeDimData[i].yvalueList);
+                    dimensionDataPoint.AddGroupParam(null, i);
                     dimensionDataPoint3D.DimensionDataList.Add(dimensionDataPoint);
                 }
                 sample = CreateSampleScanResult(dimensionDataPoint3D);

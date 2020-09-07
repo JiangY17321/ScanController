@@ -13,7 +13,7 @@ namespace TestWinLab.ParamSettingPanel
     {
         private SampleEntry _lastSampleEntry;
 
-        public ObservableCollection<double> Z_DimValues { get; set; }
+        public ObservableCollection<string> Z_DimValues { get; set; }
 
         private DimensionDataPoint _currrentDimensionDataPoint;
 
@@ -22,7 +22,7 @@ namespace TestWinLab.ParamSettingPanel
         {
             InitializeComponent();
             _lastSampleEntry = null;
-            Z_DimValues = new ObservableCollection<double>();
+            Z_DimValues = new ObservableCollection<string>();
             _currrentDimensionDataPoint = null;
         }
 
@@ -64,9 +64,15 @@ namespace TestWinLab.ParamSettingPanel
             else if(dimensionDataPoint.DimensionDataList!=null)
             {
                 Z_DimValues.Clear();
+                string paramName = null;
                 for (int i=0;i< dimensionDataPoint.DimensionDataList.Count; i++)
                 {
-                    Z_DimValues.Add(dimensionDataPoint.DimensionDataList[i].Value);
+                    Z_DimValues.Add(dimensionDataPoint.DimensionDataList[i].GetParamValueString());
+                    paramName = dimensionDataPoint.DimensionDataList[i].GetParamValueName();
+                }
+                if(paramName!=null)
+                {
+                    txtDimZ.Text = paramName;
                 }
                 cbDimZValue.ItemsSource = Z_DimValues;
                 cbDimZValue.SelectedIndex = 0;

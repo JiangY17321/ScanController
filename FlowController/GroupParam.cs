@@ -17,5 +17,10 @@
             GroupParam otherGroupParam = obj as GroupParam;
             return ParamName.Equals(otherGroupParam.ParamName) && ParamValue == otherGroupParam.ParamValue;
         }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
     }
 }

@@ -21,14 +21,19 @@ namespace FlowController
             if(sampleResultData.ContainsKey(sample.SampleName)==false)
             {
                 sampleResultData.Add(sample.SampleName, sample);
+                sample.SetGroupParam();
             }
             else
             {
                 Sample existSample = sampleResultData[sample.SampleName];
-                List<string> differentParamStrings = new List<string>();
-                if(sample.IsGroupParamsEqual(existSample, differentParamStrings))
+                List<GroupParam> differentParams = new List<GroupParam>();
+                if(sample.IsGroupParamsEqual(existSample, differentParams))
                 {
                     //Discard the sample with same params 
+                }
+                else
+                {
+                    existSample.CombineDimensionData(sample, differentParams);
                 }
             }
         }
