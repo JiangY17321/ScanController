@@ -1,0 +1,132 @@
+{
+  "type": "FlowController.ExperimentOperation",
+  "OperationType": 1,
+  "ChildOperations": [
+    {
+      "type": "FinchFlowController.FastScanParamOperation",
+      "ScanSpeed": 16,
+      "Resolution": 16,
+      "OperationType": 2,
+      "ChildOperations": [
+        {
+          "type": "FlowController.BackgroundDataOperation",
+          "OperationType": 4,
+          "ChildOperations": [
+            {
+              "type": "FinchFlowController.FinchScanOperation",
+              "OperationType": 6,
+              "ChildOperations": [],
+              "Name": "Scan"
+            }
+          ],
+          "Name": "Background Data"
+        },
+        {
+          "type": "FlowController.DataOperation",
+          "OperationType": 3,
+          "ChildOperations": [
+            {
+              "type": "FlowController.TemperatureOperation",
+              "Temperature": 10.0,
+              "OperationType": 50,
+              "ChildOperations": [
+                {
+                  "type": "FlowController.SampleOperation",
+                  "OperationType": 5,
+                  "ChildOperations": [
+                    {
+                      "type": "FlowController.MPROperation",
+                      "OperationType": 52,
+                      "ChildOperations": [
+                        {
+                          "type": "FinchFlowController.FinchScanOperation",
+                          "OperationType": 6,
+                          "ChildOperations": [],
+                          "Name": "Scan"
+                        }
+                      ],
+                      "Name": "Microplate Reader"
+                    }
+                  ],
+                  "Name": "Administrator 01"
+                },
+                {
+                  "type": "FlowController.SampleOperation",
+                  "OperationType": 5,
+                  "ChildOperations": [
+                    {
+                      "type": "FlowController.MPROperation",
+                      "OperationType": 52,
+                      "ChildOperations": [
+                        {
+                          "type": "FinchFlowController.FinchScanOperation",
+                          "OperationType": 6,
+                          "ChildOperations": [],
+                          "Name": "Scan"
+                        }
+                      ],
+                      "Name": "Microplate Reader"
+                    }
+                  ],
+                  "Name": "Administrator 02"
+                }
+              ],
+              "Name": "Temperature"
+            },
+            {
+              "type": "FlowController.TemperatureOperation",
+              "Temperature": 20.0,
+              "OperationType": 50,
+              "ChildOperations": [
+                {
+                  "type": "FlowController.SampleOperation",
+                  "OperationType": 5,
+                  "ChildOperations": [
+                    {
+                      "type": "FlowController.MPROperation",
+                      "OperationType": 52,
+                      "ChildOperations": [
+                        {
+                          "type": "FinchFlowController.FinchScanOperation",
+                          "OperationType": 6,
+                          "ChildOperations": [],
+                          "Name": "Scan"
+                        }
+                      ],
+                      "Name": "Microplate Reader"
+                    }
+                  ],
+                  "Name": "Administrator 01"
+                },
+                {
+                  "type": "FlowController.SampleOperation",
+                  "OperationType": 5,
+                  "ChildOperations": [
+                    {
+                      "type": "FlowController.MPROperation",
+                      "OperationType": 52,
+                      "ChildOperations": [
+                        {
+                          "type": "FinchFlowController.FinchScanOperation",
+                          "OperationType": 6,
+                          "ChildOperations": [],
+                          "Name": "Scan"
+                        }
+                      ],
+                      "Name": "Microplate Reader"
+                    }
+                  ],
+                  "Name": "Administrator 02"
+                }
+              ],
+              "Name": "Temperature"
+            }
+          ],
+          "Name": "Data"
+        }
+      ],
+      "Name": "FastScan Param"
+    }
+  ],
+  "Name": "Experiment"
+}

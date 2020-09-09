@@ -1,0 +1,66 @@
+{
+  "type": "FlowController.ExperimentOperation",
+  "OperationType": 1,
+  "ChildOperations": [
+    {
+      "type": "FlowController.DataOperation",
+      "OperationType": 3,
+      "ChildOperations": [
+        {
+          "type": "FlowController.SampleOperation",
+          "OperationType": 5,
+          "ChildOperations": [
+            {
+              "type": "FinchFlowController.FinchScanOperation",
+              "OperationType": 6,
+              "ChildOperations": [],
+              "Name": "Scan"
+            }
+          ],
+          "Name": "Administrator 01"
+        },
+        {
+          "type": "FlowController.SampleOperation",
+          "OperationType": 5,
+          "ChildOperations": [
+            {
+              "type": "FinchFlowController.FinchScanOperation",
+              "OperationType": 6,
+              "ChildOperations": [],
+              "Name": "Scan"
+            }
+          ],
+          "Name": "Administrator 02"
+        },
+        {
+          "type": "FlowController.SampleOperation",
+          "OperationType": 5,
+          "ChildOperations": [
+            {
+              "type": "FinchFlowController.FinchScanOperation",
+              "OperationType": 6,
+              "ChildOperations": [],
+              "Name": "Scan"
+            }
+          ],
+          "Name": "Administrator 03"
+        },
+        {
+          "type": "FlowController.SampleOperation",
+          "OperationType": 5,
+          "ChildOperations": [
+            {
+              "type": "FinchFlowController.FinchScanOperation",
+              "OperationType": 6,
+              "ChildOperations": [],
+              "Name": "Scan"
+            }
+          ],
+          "Name": "Administrator 04"
+        }
+      ],
+      "Name": "Data"
+    }
+  ],
+  "Name": "Experiment"
+}
