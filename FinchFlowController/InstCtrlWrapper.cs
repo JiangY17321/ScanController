@@ -103,7 +103,7 @@ namespace FinchFlowController
                 _instCtrl.DoublePoint_CallBack += DataReceived_DoublePoint;
                 _instCtrl.DoublePoint_Arrays_CallBack += DataReceived_DoublePoint_Arrays;
 #else
-                                _instCtrl = new InstrumentControlClass();
+                _instCtrl = new InstrumentControlClass();
                 int iRet= _instCtrl.Initialize((int)FLRunMode.FL_SIMULATION_CONTINUE, 0, @"C:\pefl_data\Instrument\Simulator", 0);
                 bool bRet;
                 try
