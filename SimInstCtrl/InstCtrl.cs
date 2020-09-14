@@ -7,7 +7,7 @@ namespace SimInstCtrl
     public class InstCtrl
     {
         public delegate void ScanCompelete();
-        public delegate void ScanFailed();
+        public delegate void ScanFailed(int errorCode);
         /// <summary>
         /// auto-get the data from InstCtrl 
         /// </summary>

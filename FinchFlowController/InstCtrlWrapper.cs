@@ -1,8 +1,10 @@
-﻿using FlowController;
+﻿#define NO_FINCH
+using FlowController;
 using SimInstCtrl;
 using System;
 using System.Threading;
 using FLInstCtrlLib;
+
 
 namespace FinchFlowController
 {
@@ -36,8 +38,11 @@ namespace FinchFlowController
         #endregion
 
         private ScanOperation _currentScanOperation;
-        //private InstCtrl _instCtrl;
+#if NO_FINCH
+        private InstCtrl _instCtrl;
+#else
         private IFLInstrument _instCtrl;
+#endif
         private STAThread _staThread;
         private delegate void NoReturnAndParamDelegate();
         private SynQueue<NoReturnAndParamDelegate> _callbackQueue;
@@ -89,9 +94,17 @@ namespace FinchFlowController
         {
             _staThread.Invoke(new NoReturnAndParamDelegate(() =>
             {
-                _instCtrl = new InstrumentControlClass();
+#if NO_FINCH
+                _instCtrl = new InstCtrl();
+                _instCtrl.ScanCompelete_CallBack += ScanCompelete;
+                _instCtrl.ScanFailed_CallBack += ScanFailed;
+                _instCtrl.AutoGet_CallBack += DataReceived_AutoGet;
+                _instCtrl.SinglePoint_CallBack += DataReceived_SinglePoint;
+                _instCtrl.DoublePoint_CallBack += DataReceived_DoublePoint;
+                _instCtrl.DoublePoint_Arrays_CallBack += DataReceived_DoublePoint_Arrays;
+#else
+                                _instCtrl = new InstrumentControlClass();
                 int iRet= _instCtrl.Initialize((int)FLRunMode.FL_SIMULATION_CONTINUE, 0, @"C:\pefl_data\Instrument\Simulator", 0);
-
                 bool bRet;
                 try
                 {
@@ -116,6 +129,8 @@ namespace FinchFlowController
                 flInstEvent.ScanFailed += ScanFailed;
                 flInstEvent.GetData += instrumentScan_GetData;
                 flInstEvent.GetEmData += instrumentScan_GetEmData;
+#endif
+
             }), null);
         }
 
@@ -196,7 +211,9 @@ namespace FinchFlowController
             _currentScanOperation = scanOperation;
             _staThread.Invoke(new NoReturnAndParamDelegate(() =>
             {
-                //_instCtrl.PerformScan_SinglePoint();
+#if NO_FINCH
+                _instCtrl.PerformScan_SinglePoint();
+#endif
             }), null);
             return true;
         }
@@ -207,7 +224,9 @@ namespace FinchFlowController
             _currentScanOperation = scanOperation;
             _staThread.Invoke(new NoReturnAndParamDelegate(() =>
             {
-                //_instCtrl.PerformScan_DoublePoint();
+#if NO_FINCH
+                _instCtrl.PerformScan_DoublePoint();
+#endif
             }), null);
             return true;
         }
@@ -218,7 +237,9 @@ namespace FinchFlowController
             _currentScanOperation = scanOperation;
             _staThread.Invoke(new NoReturnAndParamDelegate(() =>
             {
-                //_instCtrl.PerformScan_DoublePointArray();
+#if NO_FINCH
+                _instCtrl.PerformScan_DoublePointArray();
+#endif
             }), null);
             return true;
         }
