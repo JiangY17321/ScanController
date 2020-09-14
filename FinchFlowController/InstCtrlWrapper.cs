@@ -2,6 +2,7 @@
 using SimInstCtrl;
 using System;
 using System.Threading;
+using FLInstCtrlLib;
 
 namespace FinchFlowController
 {
@@ -35,7 +36,8 @@ namespace FinchFlowController
         #endregion
 
         private ScanOperation _currentScanOperation;
-        private InstCtrl _instCtrl;
+        //private InstCtrl _instCtrl;
+        private IFLInstrument _instCtrl;
         private STAThread _staThread;
         private delegate void NoReturnAndParamDelegate();
         private SynQueue<NoReturnAndParamDelegate> _callbackQueue;
@@ -87,13 +89,33 @@ namespace FinchFlowController
         {
             _staThread.Invoke(new NoReturnAndParamDelegate(() =>
             {
-                _instCtrl = new InstCtrl();
-                _instCtrl.ScanCompelete_CallBack += ScanCompelete;
-                _instCtrl.ScanFailed_CallBack += ScanFailed;
-                _instCtrl.AutoGet_CallBack += DataReceived_AutoGet;
-                _instCtrl.SinglePoint_CallBack += DataReceived_SinglePoint;
-                _instCtrl.DoublePoint_CallBack += DataReceived_DoublePoint;
-                _instCtrl.DoublePoint_Arrays_CallBack += DataReceived_DoublePoint_Arrays;
+                _instCtrl = new InstrumentControlClass();
+                int iRet= _instCtrl.Initialize((int)FLRunMode.FL_SIMULATION_CONTINUE, 0, @"C:\pefl_data\Instrument\Simulator", 0);
+
+                bool bRet;
+                try
+                {
+                    iRet = _instCtrl.RunWaveScan();
+                    if (iRet == (int)ERR_CODE.ERR_NONE)
+                    {
+                        bRet = true;
+                    }
+                    else
+                    {
+                        System.Diagnostics.Debug.WriteLine("Failed");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    System.Diagnostics.Debug.WriteLine(ex.Message);
+                }
+
+                _IFLInstrumentEvents_Event flInstEvent = _instCtrl as _IFLInstrumentEvents_Event;
+                flInstEvent.ScanComplete += ScanCompelete;
+                flInstEvent.ScanAbort += ScanAbort;
+                flInstEvent.ScanFailed += ScanFailed;
+                flInstEvent.GetData += instrumentScan_GetData;
+                flInstEvent.GetEmData += instrumentScan_GetEmData;
             }), null);
         }
 
@@ -113,13 +135,24 @@ namespace FinchFlowController
             }
         }
 
-        private void ScanFailed()
+        protected void ScanAbort()
         {
             if (_currentScanOperation != null && _callbackQueue != null)
             {
                 _callbackQueue.Enqueue(new NoReturnAndParamDelegate(() =>
                 {
-                    _currentScanOperation.ScanFailed(0);
+                    _currentScanOperation.ScanAbort();
+                }));
+            }
+        }
+
+        private void ScanFailed(int nErrNo)
+        {
+            if (_currentScanOperation != null && _callbackQueue != null)
+            {
+                _callbackQueue.Enqueue(new NoReturnAndParamDelegate(() =>
+                {
+                    _currentScanOperation.ScanFailed(nErrNo);
                 }));
             }
         }
@@ -163,7 +196,7 @@ namespace FinchFlowController
             _currentScanOperation = scanOperation;
             _staThread.Invoke(new NoReturnAndParamDelegate(() =>
             {
-                _instCtrl.PerformScan_SinglePoint();
+                //_instCtrl.PerformScan_SinglePoint();
             }), null);
             return true;
         }
@@ -174,7 +207,7 @@ namespace FinchFlowController
             _currentScanOperation = scanOperation;
             _staThread.Invoke(new NoReturnAndParamDelegate(() =>
             {
-                _instCtrl.PerformScan_DoublePoint();
+                //_instCtrl.PerformScan_DoublePoint();
             }), null);
             return true;
         }
@@ -185,9 +218,20 @@ namespace FinchFlowController
             _currentScanOperation = scanOperation;
             _staThread.Invoke(new NoReturnAndParamDelegate(() =>
             {
-                _instCtrl.PerformScan_DoublePointArray();
+                //_instCtrl.PerformScan_DoublePointArray();
             }), null);
             return true;
+        }
+
+
+        protected void instrumentScan_GetData(int nRepeat, int nIndex, double dXData, double dYData)
+        {
+            
+        }
+
+        protected void instrumentScan_GetEmData(int nRepeat, int nIndex, double dEmData)
+        {
+
         }
     }
 }
