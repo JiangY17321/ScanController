@@ -12,7 +12,7 @@ namespace FlowController
     {
         #region EXPORT
         [Export]
-        public OperationType OperationType { get; }
+        public OperationType OperationType { get; protected set; }
 
         [Export]
         public ObservableCollection<Operation> ChildOperations { get; set; }

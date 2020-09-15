@@ -70,7 +70,10 @@ namespace TestWinLab
                     newOpeartionNode = new TriggerOperationNode("Trigger");
                     break;
                 case "temperature":
-                    newOpeartionNode = new TemperatureOperationNode("Temperature");
+                    newOpeartionNode = new TemperatureOperationNode("Peltier");
+                    break;
+                case "temperatureScan":
+                    newOpeartionNode = new PeltierScanOperationNode("PeltierScan");
                     break;
                 case "time":
                     newOpeartionNode = new TimeOperationNode("Time");
@@ -106,6 +109,7 @@ namespace TestWinLab
                 case "time":
                 case "microplatereader":
                 case "wavelength":
+                case "temperatureScan":
                     if (operationNodes.Count == 0) return false;
                     break;
             }
@@ -235,6 +239,10 @@ namespace TestWinLab
             else if (operation.GetType() == typeof(FinchScanOperation))
             {
                 operationNode = new FinchScanOperationNode(operation as FinchScanOperation);
+            }
+            else if (operation.GetType() == typeof(PeltierScanOperation))
+            {
+                operationNode = new PeltierScanOperationNode(operation as PeltierScanOperation);
             }
             foreach (Operation childOperation in operation.ChildOperations)
             {

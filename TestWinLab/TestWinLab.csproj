@@ -86,6 +86,7 @@
     <Compile Include="OperationNode\ExperimentOperationNode.cs" />
     <Compile Include="OperationNode\FastScanParamOperationNode.cs" />
     <Compile Include="OperationNode\MPROperationNode.cs" />
+    <Compile Include="OperationNode\PeltierScanOperationNode.cs" />
     <Compile Include="OperationNode\SampleOperationNode.cs" />
     <Compile Include="OperationNode\FinchScanOperationNode.cs" />
     <Compile Include="OperationNode\TemperatureOperationNode.cs" />
@@ -248,7 +249,9 @@
     <Resource Include="Image\Experiment.png" />
     <Resource Include="Image\GeneralParam.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Image\TemperatureScan.png" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Image\BackgroundData.png" />
   </ItemGroup>

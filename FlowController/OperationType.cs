@@ -59,6 +59,11 @@
         /// Param setting for wavelength
         /// </summary>
         WaveLength = 53,
+
+        /// <summary>
+        /// PeltierScan
+        /// </summary>
+        TemperatureScan = 54,
         #endregion
 
         /// <summary>

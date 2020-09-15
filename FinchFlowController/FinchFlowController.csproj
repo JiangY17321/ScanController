@@ -45,6 +45,7 @@
     <Compile Include="FastScanParamOperation.cs" />
     <Compile Include="FinchScanOperation.cs" />
     <Compile Include="InstCtrlWrapper.cs" />
+    <Compile Include="PeltierScanOperation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="STAThread.cs" />
   </ItemGroup>

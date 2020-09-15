@@ -16,10 +16,10 @@
               "OperationType": 5,
               "ChildOperations": [
                 {
-                  "type": "FinchFlowController.FinchScanOperation",
-                  "OperationType": 6,
+                  "type": "FinchFlowController.PeltierScanOperation",
+                  "OperationType": 54,
                   "ChildOperations": [],
-                  "Name": "Scan"
+                  "Name": "PeltierScan"
                 }
               ],
               "Name": "Administrator 01"
@@ -29,16 +29,16 @@
               "OperationType": 5,
               "ChildOperations": [
                 {
-                  "type": "FinchFlowController.FinchScanOperation",
-                  "OperationType": 6,
+                  "type": "FinchFlowController.PeltierScanOperation",
+                  "OperationType": 54,
                   "ChildOperations": [],
-                  "Name": "Scan"
+                  "Name": "PeltierScan"
                 }
               ],
               "Name": "Administrator 02"
             }
           ],
-          "Name": "Temperature"
+          "Name": "Peltier"
         },
         {
           "type": "FlowController.TemperatureOperation",
@@ -50,10 +50,10 @@
               "OperationType": 5,
               "ChildOperations": [
                 {
-                  "type": "FinchFlowController.FinchScanOperation",
-                  "OperationType": 6,
+                  "type": "FinchFlowController.PeltierScanOperation",
+                  "OperationType": 54,
                   "ChildOperations": [],
-                  "Name": "Scan"
+                  "Name": "PeltierScan"
                 }
               ],
               "Name": "Administrator 01"
@@ -63,16 +63,16 @@
               "OperationType": 5,
               "ChildOperations": [
                 {
-                  "type": "FinchFlowController.FinchScanOperation",
-                  "OperationType": 6,
+                  "type": "FinchFlowController.PeltierScanOperation",
+                  "OperationType": 54,
                   "ChildOperations": [],
-                  "Name": "Scan"
+                  "Name": "PeltierScan"
                 }
               ],
               "Name": "Administrator 02"
             }
           ],
-          "Name": "Temperature"
+          "Name": "Peltier"
         },
         {
           "type": "FlowController.TemperatureOperation",
@@ -84,10 +84,10 @@
               "OperationType": 5,
               "ChildOperations": [
                 {
-                  "type": "FinchFlowController.FinchScanOperation",
-                  "OperationType": 6,
+                  "type": "FinchFlowController.PeltierScanOperation",
+                  "OperationType": 54,
                   "ChildOperations": [],
-                  "Name": "Scan"
+                  "Name": "PeltierScan"
                 }
               ],
               "Name": "Administrator 01"
@@ -97,16 +97,16 @@
               "OperationType": 5,
               "ChildOperations": [
                 {
-                  "type": "FinchFlowController.FinchScanOperation",
-                  "OperationType": 6,
+                  "type": "FinchFlowController.PeltierScanOperation",
+                  "OperationType": 54,
                   "ChildOperations": [],
-                  "Name": "Scan"
+                  "Name": "PeltierScan"
                 }
               ],
               "Name": "Administrator 02"
             }
           ],
-          "Name": "Temperature"
+          "Name": "Peltier"
         }
       ],
       "Name": "Data"

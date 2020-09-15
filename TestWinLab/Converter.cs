@@ -44,6 +44,8 @@ namespace TestWinLab
                     return "Image/Microplatereader.png";
                 case OperationType.WaveLength:
                     return "Image/Wavelength.png";
+                case OperationType.TemperatureScan:
+                    return "Image/TemperatureScan.png";
             }
             return null;
         }

@@ -59,15 +59,21 @@
                 </StackPanel>
 
                 <StackPanel Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="5" Orientation="Horizontal">
-                    <Button x:Name="btnTemperature" ToolTip="Temperature" Width="30" Height="30" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="2" Command="{Binding Path=CreateOperationCommand}" CommandParameter="temperature">
+                    <Button x:Name="btnTemperature" ToolTip="PeltierSetup" Width="30" Height="30" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="2" Command="{Binding Path=CreateOperationCommand}" CommandParameter="temperature">
                         <Image Source="Image/Temperature.png"/>
                     </Button>
-                    <Button x:Name="btnTime" ToolTip="Time" Width="30" Height="30" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="2" Command="{Binding Path=CreateOperationCommand}" CommandParameter="time">
-                        <Image Source="Image/Time.png"/>
+                    <Button x:Name="btnTemperatureScan" ToolTip="PeltierScan" Width="30" Height="30" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="2" Command="{Binding Path=CreateOperationCommand}" CommandParameter="temperatureScan">
+                        <Image Source="Image/TemperatureScan.png"/>
                     </Button>
+                    <TextBlock Width="20" />
                     <Button x:Name="btnMicroplatereader" ToolTip="Microplate Reader Position" Width="30" Height="30" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="2" Command="{Binding Path=CreateOperationCommand}" CommandParameter="microplatereader">
                         <Image Source="Image/Microplatereader.png"/>
                     </Button>
+                    <TextBlock Width="20" />
+                    <Button x:Name="btnTime" ToolTip="Time" Width="30" Height="30" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="2" Command="{Binding Path=CreateOperationCommand}" CommandParameter="time">
+                        <Image Source="Image/Time.png"/>
+                    </Button>
+                    <TextBlock Width="20" />
                     <Button x:Name="btnWaveLength" ToolTip="Wave length" Width="30" Height="30" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="2" Command="{Binding Path=CreateOperationCommand}" CommandParameter="wavelength">
                         <Image Source="Image/Wavelength.png"/>
                     </Button>
